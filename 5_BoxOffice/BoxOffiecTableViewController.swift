@@ -201,11 +201,8 @@ extension BoxOfficeTableViewController: UITableViewDelegate, UITableViewDataSour
             DispatchQueue.main.async {
                 if let index: IndexPath = self.tableView.indexPath(for: cell) {
                     if index.row == indexPath.row {
-                        print("\(index)  \(index.row) \(indexPath.row)")
                         cell.movieThumb.image = UIImage(data: thumbImageData)
                     }
-                } else {
-                    print("noneee")
                 }
             }
         }

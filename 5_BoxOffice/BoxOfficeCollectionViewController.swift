@@ -136,13 +136,32 @@ class BoxOfficeCollectionViewController: BaseViewController {
     }
     
     private func intializeViews() {
-        intializeStatusBar()
-        intializeNavigationBar()
+        initializeStatusBar()
+        initializeNavigationBar()
+        initializeFlowLayout()
         
         indicator.isHidden = true
     }
     
-    private func intializeNavigationBar() {
+    let halfWidth = UIScreen.main.bounds.width / 2.0
+    let halfHeight = UIScreen.main.bounds.height / 2.0
+    
+    private var isFirst = false
+    
+    private func initializeFlowLayout() {
+        let flowLayout = UICollectionViewFlowLayout()
+
+        flowLayout.sectionInset = UIEdgeInsets.zero
+        flowLayout.minimumInteritemSpacing = 10
+        flowLayout.minimumLineSpacing = 10
+        
+        flowLayout.estimatedItemSize = CGSize(width: halfWidth - 30, height: halfHeight - 60)
+        flowLayout.itemSize = CGSize(width: halfWidth - 30, height: halfHeight - 60)
+        
+        self.collectionView.collectionViewLayout = flowLayout
+    }
+    
+    private func initializeNavigationBar() {
         let lightBlue = "#84A3F6"
         
         navigationController?.navigationBar.tintColor = UIColor.white
@@ -150,23 +169,26 @@ class BoxOfficeCollectionViewController: BaseViewController {
         navigationController?.navigationBar.barTintColor = lightBlue.hexStringToUIColor()
     }
     
-    private func intializeStatusBar() {
+    private func initializeStatusBar() {
         let lightBlue = "#84A3F6"
         
         UIApplication.shared.statusBarView?.backgroundColor = lightBlue.hexStringToUIColor()
     }
+    var prefetchedMovies: [Movie] = []
 }
 
 extension BoxOfficeCollectionViewController: UICollectionViewDataSource, UICollectionViewDelegate {
-    
+
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return movies.count
     }
-    
+
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell: BoxOfficeCollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: "collection_cell", for: indexPath) as? BoxOfficeCollectionViewCell else {
             return UICollectionViewCell()
         }
+        
+        cell.contentView.translatesAutoresizingMaskIntoConstraints = false
         
         let movie: Movie = movies[indexPath.item]
         
@@ -199,21 +221,16 @@ extension BoxOfficeCollectionViewController: UICollectionViewDataSource, UIColle
             }
             
             DispatchQueue.main.async {
-                print("\(indexPath.count) , \(indexPath.item)")
-                let cell = self.collectionView.cellForItem(at: indexPath) as! BoxOfficeCollectionViewCell
-
+                //다운받는 동안 사용자가 스크롤 할수있음. 셀의 위치,배치가 잘못될수도 있음. 다른 위치에 가있을수도
+                //그래서 셀이 지금 데이터를 세팅해 주고있는 현재 인덱스와 이미지 다운로드가 끝났을때 인덱스가 상의할 수 있기 때문에,
+                //그걸 구분해주고 서로 일치할때만 이미지 세팅
                 
                 if let index: IndexPath = self.collectionView.indexPath(for: cell) {
-                                        if index.item == indexPath.item {
-                                            cell.movieThumb.image = UIImage(data: thumbImageData)
-                                        }
-                }
-                
-//                if let index: IndexPath = self.collectionView.indexPath(for: cell) {
-//                    if index.item == indexPath.item {
-//                        cell.movieThumb.image = UIImage(data: thumbImageData)
-//                    }
-//                }
+                    print("here")
+                    if index.item == indexPath.item {
+                        cell.movieThumb.image = UIImage(data: thumbImageData)
+                    }
+                } 
             }
         }
         
