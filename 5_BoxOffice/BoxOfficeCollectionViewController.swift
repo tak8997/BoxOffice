@@ -142,21 +142,17 @@ class BoxOfficeCollectionViewController: BaseViewController {
         
         indicator.isHidden = true
     }
-    
     let halfWidth = UIScreen.main.bounds.width / 2.0
     let halfHeight = UIScreen.main.bounds.height / 2.0
-    
-    private var isFirst = false
     
     private func initializeFlowLayout() {
         let flowLayout = UICollectionViewFlowLayout()
 
-        flowLayout.sectionInset = UIEdgeInsets.zero
-        flowLayout.minimumInteritemSpacing = 10
-        flowLayout.minimumLineSpacing = 10
         
-        flowLayout.estimatedItemSize = CGSize(width: halfWidth - 30, height: halfHeight - 60)
-        flowLayout.itemSize = CGSize(width: halfWidth - 30, height: halfHeight - 60)
+        
+        flowLayout.sectionInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
+        flowLayout.estimatedItemSize = CGSize(width: halfWidth - 20, height: halfHeight - 60)
+//        flowLayout.itemSize = CGSize(width: halfWidth - 20, height: halfHeight - 60)
         
         self.collectionView.collectionViewLayout = flowLayout
     }
@@ -174,7 +170,7 @@ class BoxOfficeCollectionViewController: BaseViewController {
         
         UIApplication.shared.statusBarView?.backgroundColor = lightBlue.hexStringToUIColor()
     }
-    var prefetchedMovies: [Movie] = []
+    
 }
 
 extension BoxOfficeCollectionViewController: UICollectionViewDataSource, UICollectionViewDelegate {
@@ -188,9 +184,11 @@ extension BoxOfficeCollectionViewController: UICollectionViewDataSource, UIColle
             return UICollectionViewCell()
         }
         
-        cell.contentView.translatesAutoresizingMaskIntoConstraints = false
-        
         let movie: Movie = movies[indexPath.item]
+        
+        cell.contentView.translatesAutoresizingMaskIntoConstraints = false
+        cell.contentView.frame.size.width = halfWidth - 20
+        cell.contentView.backgroundColor = UIColor.red
         
         cell.movieTitle.text = movie.title
         cell.movieUserRating.text = "(\(movie.userRating))"
