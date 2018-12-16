@@ -19,5 +19,22 @@ class BoxOfficeCommentTableViewCell: UITableViewCell {
     @IBOutlet weak var userId: UILabel!
     @IBOutlet weak var userRatingStar: CosmosView!
     @IBOutlet weak var userCommentDate: UILabel!
-    @IBOutlet weak var userComment: UILabel!    
+    @IBOutlet weak var userComment: UILabel!
+    
+    func configure(comment: Comment) {
+        let date = Date(timeIntervalSince1970: comment.timestamp)
+        let dateFormatter = DateFormatter()
+        dateFormatter.timeZone = TimeZone(abbreviation: "GMT")
+        dateFormatter.locale = NSLocale.current
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        let strDate = dateFormatter.string(from: date)
+        
+        let starCount = StarCount(rating: comment.rating).getStartCount()
+        
+        userId.text = comment.writer
+        userCommentDate.text = strDate
+        userComment.text = comment.contents
+        userRatingStar.rating = starCount
+        userRatingStar.settings.updateOnTouch = false
+    }
 }

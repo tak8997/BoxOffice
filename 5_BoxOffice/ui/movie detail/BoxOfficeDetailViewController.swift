@@ -41,7 +41,6 @@ class BoxOfficeDetailViewController: BaseViewController, ModalViewControllerDele
     func sendStatus(status: NetworkStatus) {
         if status == NetworkStatus.success {
             fetchComment()
-            
             print("success register comment")
         } else if status == NetworkStatus.failure {
             print("cannot register comment")
@@ -83,26 +82,6 @@ class BoxOfficeDetailViewController: BaseViewController, ModalViewControllerDele
                 self.hideIndicator()
             }
         }
-    }
-    
-    private func getStartCount(rating: Double) -> Double {
-        let starCnt: Double
-        
-        switch rating {
-        case 0.0...1.0 : starCnt = 0.5
-        case 1.0...2.0 : starCnt = 1.0
-        case 2.0...3.0 : starCnt = 1.5
-        case 3.0...4.0 : starCnt = 2.0
-        case 4.0...5.0 : starCnt = 2.5
-        case 5.0...6.0 : starCnt = 3.0
-        case 6.0...7.0 : starCnt = 3.5
-        case 7.0...8.0 : starCnt = 4.0
-        case 8.0...9.0 : starCnt = 4.5
-        case 9.0...10.0 : starCnt = 5.0
-        default: starCnt = 0.0
-        }
-        
-        return starCnt
     }
     
     @objc func tappedPostContent(gesture: UITapGestureRecognizer) {
@@ -167,46 +146,11 @@ extension BoxOfficeDetailViewController: UITableViewDelegate, UITableViewDataSou
                 return BoxOfficeTableViewCell()
             }
             
-            let movieDetail = self.movieDetail
-            
-            cell.movieTitle.text = movieDetail?.title
-            cell.movieGenre.text = movieDetail?.genre
-            if  let duration = movieDetail?.duration,
-                let grade = movieDetail?.reservationGrade,
-                let rate = movieDetail?.reservationRate,
-                let rating = movieDetail?.userRating,
-                let audience = movieDetail?.audience,
-                let date = movieDetail?.date {
-                
-                cell.movieDuration.text = "\(duration)분"
-                cell.movieReservationGrade.text = "\(grade)위"
-                cell.movieReservationRate.text = "\(rate)%"
-                cell.movieUserRating.text = String(rating)
-                cell.movieAudienceCount.text = audience.convertNumberToDecimalFormatter()
-                cell.movieDate.text = "\(date)개봉"
-                
-                let startCnt: Double = getStartCount(rating: rating)
-                
-                cell.movieUserRatingStar.settings.updateOnTouch = false
-                cell.movieUserRatingStar.rating = startCnt
-            }
-            
-            let gradeImageType: String
-            
-            switch movieDetail?.grade {
-            case 0: gradeImageType = "ic_12"
-            case 12: gradeImageType = "ic_15"
-            case 15: gradeImageType = "ic_19"
-            case 19: gradeImageType = "ic_allages"
-            default: gradeImageType = "ic_allages"
-            }
-            
             let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(tappedMovieImage(tapGestureRecognizer:)))
             
-            cell.movieGrade.image = UIImage(named: gradeImageType)
-            cell.movieImage.image = UIImage(named: "img_placeholder")
-            cell.movieImage.isUserInteractionEnabled = true
-            cell.movieImage.addGestureRecognizer(tapGestureRecognizer)
+            let movieDetail = self.movieDetail
+            
+            cell.configure(movieDetail: movieDetail)
             
             DispatchQueue.global().async {
                 guard
@@ -219,6 +163,7 @@ extension BoxOfficeDetailViewController: UITableViewDelegate, UITableViewDataSou
                 
                 DispatchQueue.main.async {
                     cell.movieImage.image = UIImage(data: data)
+                    cell.movieImage.addGestureRecognizer(tapGestureRecognizer)
                 }
             }
             
@@ -251,20 +196,7 @@ extension BoxOfficeDetailViewController: UITableViewDelegate, UITableViewDataSou
             
             let comment = self.comments[indexPath.row]
             
-            let date = Date(timeIntervalSince1970: comment.timestamp)
-            let dateFormatter = DateFormatter()
-            dateFormatter.timeZone = TimeZone(abbreviation: "GMT")
-            dateFormatter.locale = NSLocale.current
-            dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-            let strDate = dateFormatter.string(from: date)
-            
-            let starCnt = getStartCount(rating: comment.rating)
-            
-            cell.userId.text = comment.writer
-            cell.userCommentDate.text = strDate
-            cell.userComment.text = comment.contents
-            cell.userRatingStar.rating = starCnt
-            cell.userRatingStar.settings.updateOnTouch = false
+            cell.configure(comment: comment)
             
             return cell
         default:
