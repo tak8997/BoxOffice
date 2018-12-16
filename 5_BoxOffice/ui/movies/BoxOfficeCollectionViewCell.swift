@@ -17,4 +17,5 @@ class BoxOfficeCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var movieReservationGrade: UILabel!   //에매순위
     @IBOutlet weak var movieReservationRate: UILabel!    //예매율
     @IBOutlet weak var movieReleaseDate: UILabel!
+    @IBOutlet weak var movieViewContainer: UIView!
 }

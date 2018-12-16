@@ -148,11 +148,8 @@ class BoxOfficeCollectionViewController: BaseViewController {
     private func initializeFlowLayout() {
         let flowLayout = UICollectionViewFlowLayout()
 
-        
-        
         flowLayout.sectionInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
         flowLayout.estimatedItemSize = CGSize(width: halfWidth - 20, height: halfHeight - 60)
-//        flowLayout.itemSize = CGSize(width: halfWidth - 20, height: halfHeight - 60)
         
         self.collectionView.collectionViewLayout = flowLayout
     }
@@ -187,10 +184,12 @@ extension BoxOfficeCollectionViewController: UICollectionViewDataSource, UIColle
         let movie: Movie = movies[indexPath.item]
         
         cell.contentView.translatesAutoresizingMaskIntoConstraints = false
-        cell.contentView.frame.size.width = halfWidth - 20
+        cell.contentView.frame = cell.bounds
         cell.contentView.backgroundColor = UIColor.red
-        
+    
+        cell.movieTitle.translatesAutoresizingMaskIntoConstraints = false
         cell.movieTitle.text = movie.title
+        cell.movieTitle.frame.size.width = halfWidth - 30
         cell.movieUserRating.text = "(\(movie.userRating))"
         cell.movieReservationGrade.text = "\(movie.reservationGrade)위"
         cell.movieReservationRate.text = "\(movie.reservationRate)%"
@@ -224,9 +223,9 @@ extension BoxOfficeCollectionViewController: UICollectionViewDataSource, UIColle
                 //그걸 구분해주고 서로 일치할때만 이미지 세팅
                 
                 if let index: IndexPath = self.collectionView.indexPath(for: cell) {
-                    print("here")
                     if index.item == indexPath.item {
                         cell.movieThumb.image = UIImage(data: thumbImageData)
+                        
                     }
                 } 
             }
