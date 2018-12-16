@@ -14,9 +14,6 @@ protocol ModalViewControllerDelegate {
 }
 
 class BoxOfficeCommentModalViewController: BaseViewController {
-
-    var movieDetail: MovieDetail?
-    var delegate: ModalViewControllerDelegate?
     
     @IBOutlet weak var movieTitleLabel: UILabel!
     @IBOutlet weak var movieGradeImage: UIImageView!
@@ -25,12 +22,14 @@ class BoxOfficeCommentModalViewController: BaseViewController {
     @IBOutlet weak var userRatingStarView: CosmosView!
     @IBOutlet weak var userRatingLabel: UILabel!
     
+    var movieDetail: MovieDetail?
+    var delegate: ModalViewControllerDelegate?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     
         initializeViews()
-        intializeNotificationObserver()
-        
+
         fetchSavedNickname()
     }
     
@@ -39,41 +38,7 @@ class BoxOfficeCommentModalViewController: BaseViewController {
         
         hideIndicator()
     }
-    
-    @objc func tappedModalDismiss(sender: UIBarButtonItem) {
-        dismiss(animated: true, completion: nil)
-    }
-    
-    @objc func tappedCommentPostSuccess(sender: UIBarButtonItem) {
-        let userNickname = userNicknameTextField.text
-        let userComment = commentTextView.text
-        let userRating = userRatingStarView.rating
-        
-        guard let nickname = userNickname, let comment = userComment else {
-            return
-        }
-        
-        if !nickname.isEmpty && !comment.isEmpty && userRating != 0.0 {
-            registerMovieComment(id: movieDetail?.id, nickname: nickname, comment: comment, rating: userRating)
-        } else {
-            showAlertController()
-        }
-        
-        saveNickName(nickname: nickname)
-    }
-    
-    @objc func didReceiveCommentResponseNotification(_ noti: Notification) {
-        hideIndicator()
 
-        guard let status: Int = noti.userInfo?["status"] as? Int else {
-            return
-        }
-    
-        delegate?.sendStatus(status: status)
-        
-        dismiss(animated: true, completion: nil)
-    }
-    
     private func showAlertController() {
         let style = UIAlertControllerStyle.alert
         
@@ -88,7 +53,7 @@ class BoxOfficeCommentModalViewController: BaseViewController {
         alertController.addAction(okAction)
         alertController.addAction(cancelAction)
         
-        present(alertController, animated: true, completion: nil)
+        self.present(alertController, animated: true, completion: nil)
     }
 
     private func saveNickName(nickname: String) {
@@ -125,7 +90,12 @@ class BoxOfficeCommentModalViewController: BaseViewController {
     private func registerMovieComment(id: String?, nickname: String, comment: String, rating: Double) {
         showIndicator()
         
-        registerComment(id: id, nickname: nickname, comment: comment, rating: rating)
+        BoxOfficeService.registerMovieComment(id: id, nickname: nickname, comment: comment, rating: rating) { response in
+            self.hideIndicator()
+            self.delegate?.sendStatus(status: response)
+
+            self.dismiss(animated: true, completion: nil)
+        }
     }
 
     private func initializeViews() {
@@ -188,26 +158,34 @@ class BoxOfficeCommentModalViewController: BaseViewController {
     }
     
     private func intializeNavigationBar() {
-        let lightBlue = "#84A3F6"
-        
         navigationController?.navigationBar.topItem?.title = "한줄평 작성"
         navigationController?.navigationBar.topItem?.leftBarButtonItem = UIBarButtonItem(title: "취소", style: .plain, target: self, action: #selector(tappedModalDismiss(sender:)) )
         navigationController?.navigationBar.topItem?.rightBarButtonItem = UIBarButtonItem(title: "완료", style: .plain, target: self, action: #selector(tappedCommentPostSuccess(sender:)) )
         navigationController?.navigationBar.tintColor = UIColor.white
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor : UIColor.white]
-        navigationController?.navigationBar.barTintColor = lightBlue.hexStringToUIColor()
+        navigationController?.navigationBar.barTintColor = UIColor.lightBlue
     }
 
-    private func intializeNotificationObserver() {
-        NotificationCenter.default.addObserver(self, selector: #selector(self.didReceiveCommentResponseNotification(_:)), name: DidReceiveCommentResponseNotification, object: nil)
+    @objc func tappedModalDismiss(sender: UIBarButtonItem) {
+        dismiss(animated: true, completion: nil)
     }
+    
+    @objc func tappedCommentPostSuccess(sender: UIBarButtonItem) {
+        let userNickname = userNicknameTextField.text
+        let userComment = commentTextView.text
+        let userRating = userRatingStarView.rating
+        
+        guard let nickname = userNickname, let comment = userComment else {
+            return
+        }
+        
+        if !nickname.isEmpty && !comment.isEmpty && userRating != 0.0 {
+            registerMovieComment(id: movieDetail?.id, nickname: nickname, comment: comment, rating: userRating)
+        } else {
+            showAlertController()
+        }
+        
+        saveNickName(nickname: nickname)
+    }
+    
 }
-
-
-
-
-
-
-
-
-

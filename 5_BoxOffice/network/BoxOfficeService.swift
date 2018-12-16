@@ -67,4 +67,30 @@ class BoxOfficeService {
         }
     }
     
+    static func registerMovieComment(id: String?, nickname: String, comment: String, rating: Double, completion: @escaping(Int) -> ()) {
+        
+        guard let url: URL = URL(string: baseUrl + "comment") else {
+            return
+        }
+        
+        guard let id: String = id else {
+            return
+        }
+        
+        let parameterDictionary = ["rating": rating, "writer": nickname, "movie_id": id, "contents": comment] as [String : Any]
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.setValue("Application/json", forHTTPHeaderField: "Content-Type")
+        guard let httpBody = try? JSONSerialization.data(withJSONObject: parameterDictionary, options: []) else {
+            return
+        }
+        request.httpBody = httpBody
+        
+        NetworkService.shared.postData(request: request) { (json) in
+            print("zzz")
+            completion(Constants.success)
+        }
+    }
+    
 }
