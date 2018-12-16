@@ -33,6 +33,7 @@ class BaseViewController: UIViewController {
             if self.indicator.isAnimating == false {
                 self.indicator.isHidden = false
                 self.indicator.startAnimating()
+                
                 UIApplication.shared.isNetworkActivityIndicatorVisible = true
             }
         }
@@ -67,6 +68,6 @@ class BaseViewController: UIViewController {
     }
     
     private func initializeNetworkFailNotification() {
-        NotificationCenter.default.addObserver(self, selector: #selector(self.didReceiveNetworkErrorEvent(_:)), name: getNetworkErrorNotification(), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.didReceiveNetworkErrorEvent(_:)), name: networkErrorNotificationName, object: nil)
     }
 }

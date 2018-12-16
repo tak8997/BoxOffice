@@ -12,3 +12,6 @@ import Foundation
 enum NetworkError: Error {
     case internetError
 }
+
+let networkErrorNotificationName = Notification.Name("ErrorHandling")
+
