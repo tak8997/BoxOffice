@@ -13,7 +13,7 @@ class BoxOfficeService {
     
     private static let baseUrl = "http://connect-boxoffice.run.goorm.io/"
     
-    private static var movies: [Movie] = []
+    private static var movies: [String : [Movie]] = [:]
     private static var movie: [String : MovieDetail] = [:]
     private static var comments: [String: [Comment]] = [:]
     
@@ -22,7 +22,7 @@ class BoxOfficeService {
             return
         }
         
-        if movies.count != 0 {
+        if let movies = movies[orderType] {
             print("movie list local cache")
             completion(movies)
             return
@@ -33,7 +33,7 @@ class BoxOfficeService {
             do {
                 let response = try MoviesApiResponse(json: json)
                 
-                self.movies = response.movies
+                self.movies[orderType] = response.movies
                 
                 completion(response.movies)
             } catch {

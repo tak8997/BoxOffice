@@ -8,16 +8,6 @@
 
 import Foundation
 
-//class OrderType {
-//    static let type: OrderType = OrderType()
-//
-//    let rate = "0"
-//    let curation = "1"
-//    let date = "2"
-//
-//    lazy var requestOrderType = rate
-//}
-
 enum OrderType: String {
     case rate = "0"
     case curation = "1"
