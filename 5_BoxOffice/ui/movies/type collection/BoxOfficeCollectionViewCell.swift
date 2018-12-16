@@ -19,10 +19,16 @@ class BoxOfficeCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var movieReleaseDate: UILabel!
     @IBOutlet weak var movieViewContainer: UIView!
     
+    @IBOutlet weak var imageWidth: NSLayoutConstraint!
+    @IBOutlet weak var imageHeight: NSLayoutConstraint!
+    
+    
     func configure(_ movie: Movie) { // da
         contentView.translatesAutoresizingMaskIntoConstraints = false
         contentView.frame = bounds
-        contentView.backgroundColor = UIColor.red
+        
+        imageWidth.constant = UIScreen.main.bounds.width / 2 - 20
+        imageHeight.constant = UIScreen.main.bounds.height / 2 - 60 - 85
         
         movieUserRating.text = "(\(movie.userRating))"
         movieReservationGrade.text = "\(movie.reservationGrade)위"
