@@ -25,6 +25,26 @@ import Foundation
 //    synopsis: "저승 법에 의하면, (중략) 고난과 맞닥뜨리는데... 누구나 가지만 아무도 본 적 없는 곳, 새로
 //    운 세계의 문이 열린다!", genre: "판타지, 드라마"
 //}
+struct MovieDetailApiResponse: Codable {
+    
+    typealias JSON = [String: AnyObject]
+    
+    let movie: MovieDetail
+    
+    init(json: Any) throws {
+        guard
+            let json = json as? JSON,
+            let movie = MovieDetail(dict: json) else {
+                
+                NotificationCenter.default.post(name: networkErrorNotificationName, object: nil)
+                
+                throw NetworkError.internetError
+        }
+        
+        self.movie = movie
+    }
+}
+
 struct MovieDetail: Codable {
     let audience: Int
     let grade: Int
@@ -40,11 +60,40 @@ struct MovieDetail: Codable {
     let image: String
     let synopsis: String
     let genre: String
-    
-    enum CodingKeys: String, CodingKey {
-        case audience, grade, actor, duration, title, date, director, id, image, synopsis, genre
-        case reservationGrade = "reservation_grade"
-        case reservationRate = "reservation_rate"
-        case userRating = "user_rating"
+
+    init?(dict: [String: AnyObject]) {
+        guard
+            let audience = dict["audience"] as? Int,
+            let grade = dict["grade"] as? Int,
+            let actor = dict["actor"] as? String,
+            let duration = dict["duration"] as? Int,
+            let reservationGrade = dict["reservation_grade"] as? Int,
+            let title = dict["title"] as? String,
+            let reservationRate = dict["reservation_rate"] as? Double,
+            let userRating = dict["user_rating"] as? Double,
+            let date = dict["date"] as? String,
+            let director = dict["director"] as? String,
+            let id = dict["id"] as? String,
+            let image = dict["image"] as? String,
+            let synopsis = dict["synopsis"] as? String,
+            let genre = dict["genre"] as? String else {
+                
+                return nil
+        }
+        
+        self.audience = audience
+        self.grade = grade
+        self.actor = actor
+        self.duration = duration
+        self.reservationGrade = reservationGrade
+        self.title = title
+        self.reservationRate = reservationRate
+        self.userRating = userRating
+        self.date = date
+        self.director = director
+        self.id = id
+        self.image = image
+        self.synopsis = synopsis
+        self.genre = genre
     }
 }

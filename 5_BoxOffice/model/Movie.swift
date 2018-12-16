@@ -33,13 +33,6 @@ import Foundation
 //    "id": "5a54c1e9e8a71d136fb5376c"
 //    },
 
-//struct MoviesApiResponse: Codable {
-//    let movies: [Movie]
-//
-//    enum CodingKeys: String, CodingKey {
-//        case movies
-//    }
-//}
 
 struct MoviesApiResponse: Codable {
  
@@ -52,7 +45,9 @@ struct MoviesApiResponse: Codable {
             let json = json as? JSON,
             let array = json["movies"] as? [JSON] else {
                 
-            throw NetworkError.internetError
+                NotificationCenter.default.post(name: networkErrorNotificationName, object: nil)
+                
+                throw NetworkError.internetError
         }
         
         var movies = [Movie]()
@@ -102,11 +97,4 @@ struct Movie: Codable {
         self.date = date
         self.id = id
     }
-    
-//    enum CodingKeys: String, CodingKey {
-//        case grade, thumb, title, date, id
-//        case reservationGrade = "reservation_grade"
-//        case reservationRate = "reservation_rate"
-//        case userRating = "user_rating"
-//    }
 }

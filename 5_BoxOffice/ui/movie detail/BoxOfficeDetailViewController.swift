@@ -26,17 +26,12 @@ class BoxOfficeDetailViewController: BaseViewController, ModalViewControllerDele
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        intializeNotificationObserver()
         intializeViews()
         
         fetchMovie()
         fetchComment()
     }
 
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-    }
-    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
@@ -46,36 +41,10 @@ class BoxOfficeDetailViewController: BaseViewController, ModalViewControllerDele
     func sendStatus(status: Int) {
         if status == Constants.success {
             fetchComment()
+            
             print("success register comment")
         } else if status == Constants.failure {
             print("cannot register comment")
-        }
-    }
-    
-    @objc func didReceiveMovieDetailNotification(_ noti: Notification) {
-        guard let movieDetail: MovieDetail = noti.userInfo?["movieDetail"] as? MovieDetail else {
-            return
-        }
-        
-        self.movieDetail = movieDetail
-        
-        DispatchQueue.main.async {
-            self.tableView.reloadSections(IndexSet(self.detailSection...self.infoSection), with: .automatic)
-        }
-    }
-    
-    @objc func didReceiveMovieCommentNotification(_ noti: Notification) {
-        guard let comments: [Comment] = noti.userInfo?["movieComment"] as? [Comment] else {
-            return
-        }
-        
-        self.comments.removeAll()
-        self.comments.append(contentsOf: comments)
-        
-        DispatchQueue.main.async {
-            self.tableView.reloadSections(IndexSet(self.commentSection...self.commentSection), with: .automatic)
-            
-            self.hideIndicator()
         }
     }
     
@@ -112,10 +81,10 @@ class BoxOfficeDetailViewController: BaseViewController, ModalViewControllerDele
         present(navBoxOfficeMovieImageViewController, animated: true, completion: nil)
     }
     
-    private func intializeNotificationObserver() {
-        NotificationCenter.default.addObserver(self, selector: #selector(self.didReceiveMovieDetailNotification(_:)), name: DidReceiveMovieDetailNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(self.didReceiveMovieCommentNotification(_:)), name: DidReceiveMovieCommentNotification, object: nil)
-    }
+//    private func intializeNotificationObserver() {
+//        NotificationCenter.default.addObserver(self, selector: #selector(self.didReceiveMovieDetailNotification(_:)), name: DidReceiveMovieDetailNotification, object: nil)
+//        NotificationCenter.default.addObserver(self, selector: #selector(self.didReceiveMovieCommentNotification(_:)), name: DidReceiveMovieCommentNotification, object: nil)
+//    }
     
     private func intializeViews() {
         navigationController?.navigationBar.topItem?.title = "영화목록"
@@ -126,18 +95,31 @@ class BoxOfficeDetailViewController: BaseViewController, ModalViewControllerDele
     }
     
     private func fetchMovie() {
-        if let id = movieId {
+        if let movieId = movieId {
             showIndicator()
-            
-            fetchDetailMovie(movieId: id)
+
+            BoxOfficeService.fetchMovieDetail(movieId: movieId) { response in
+                self.movieDetail = response.movie
+                
+                self.tableView.reloadSections(IndexSet(self.detailSection...self.infoSection), with: .automatic)
+            }
         }
     }
-    
+
     private func fetchComment() {
-        if let id = movieId {
+        if let movieId = movieId {
             showIndicator()
-            
-            fetchMovieComment(moviedId: id)
+
+            BoxOfficeService.fetchMovieComment(movieId: movieId) { response in
+                let comments = response.comments
+
+                self.comments.removeAll()
+                self.comments.append(contentsOf: comments)
+                
+                self.tableView.reloadSections(IndexSet(self.commentSection...self.commentSection), with: .automatic)
+                
+                self.hideIndicator()
+            }
         }
     }
     
