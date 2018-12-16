@@ -7,3 +7,8 @@
 //
 
 import Foundation
+
+enum NetworkStatus {
+    case success
+    case failure
+}

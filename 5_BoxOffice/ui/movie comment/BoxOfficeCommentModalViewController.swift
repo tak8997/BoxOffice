@@ -10,7 +10,7 @@ import UIKit
 import Cosmos
 
 protocol ModalViewControllerDelegate {
-    func sendStatus(status: Int)
+    func sendStatus(status: NetworkStatus)
 }
 
 class BoxOfficeCommentModalViewController: BaseViewController {

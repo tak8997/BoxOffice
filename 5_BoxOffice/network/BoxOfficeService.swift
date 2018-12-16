@@ -67,7 +67,7 @@ class BoxOfficeService {
         }
     }
     
-    static func registerMovieComment(id: String?, nickname: String, comment: String, rating: Double, completion: @escaping(Int) -> ()) {
+    static func registerMovieComment(id: String?, nickname: String, comment: String, rating: Double, completion: @escaping(NetworkStatus) -> ()) {
         
         guard let url: URL = URL(string: baseUrl + "comment") else {
             return
@@ -88,8 +88,7 @@ class BoxOfficeService {
         request.httpBody = httpBody
         
         NetworkService.shared.postData(request: request) { (json) in
-            print("zzz")
-            completion(Constants.success)
+            completion(NetworkStatus.success)
         }
     }
     

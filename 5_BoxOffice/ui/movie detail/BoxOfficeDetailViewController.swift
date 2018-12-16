@@ -38,12 +38,12 @@ class BoxOfficeDetailViewController: BaseViewController, ModalViewControllerDele
         hideIndicator()
     }
     
-    func sendStatus(status: Int) {
-        if status == Constants.success {
+    func sendStatus(status: NetworkStatus) {
+        if status == NetworkStatus.success {
             fetchComment()
             
             print("success register comment")
-        } else if status == Constants.failure {
+        } else if status == NetworkStatus.failure {
             print("cannot register comment")
         }
     }
