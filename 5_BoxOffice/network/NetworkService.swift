@@ -59,7 +59,6 @@ class NetworkService {
                     DispatchQueue.main.async {
                         completion(json)
                     }
-                    return
                 }
             } catch {
                 NotificationCenter.default.post(name: networkErrorNotificationName, object: nil)

@@ -91,8 +91,8 @@ class BoxOfficeTableViewController: BaseViewController {
     }
     
     private func fetchMovies() {
-        BoxOfficeService.fetchMovies(orderType: self.orderType.rawValue) { (response) in
-            self.movies = response.movies
+        BoxOfficeService.fetchMovies(orderType: self.orderType.rawValue) { (movies) in
+            self.movies = movies
             
             self.tableView.reloadData()
             self.refreshControl.endRefreshing()

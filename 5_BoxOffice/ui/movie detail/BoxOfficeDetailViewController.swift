@@ -60,8 +60,8 @@ class BoxOfficeDetailViewController: BaseViewController, ModalViewControllerDele
         if let movieId = movieId {
             showIndicator()
 
-            BoxOfficeService.fetchMovieDetail(movieId: movieId) { response in
-                self.movieDetail = response.movie
+            BoxOfficeService.fetchMovieDetail(movieId: movieId) { movie in
+                self.movieDetail = movie
                 
                 self.tableView.reloadSections(IndexSet(self.detailSection...self.infoSection), with: .automatic)
             }
@@ -72,8 +72,8 @@ class BoxOfficeDetailViewController: BaseViewController, ModalViewControllerDele
         if let movieId = movieId {
             showIndicator()
 
-            BoxOfficeService.fetchMovieComment(movieId: movieId) { response in
-                let comments = response.comments
+            BoxOfficeService.fetchMovieComment(movieId: movieId) { comments in
+                let comments = comments
 
                 self.comments.removeAll()
                 self.comments.append(contentsOf: comments)

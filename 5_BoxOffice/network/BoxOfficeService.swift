@@ -13,8 +13,18 @@ class BoxOfficeService {
     
     private static let baseUrl = "http://connect-boxoffice.run.goorm.io/"
     
-    static func fetchMovies(orderType: String, completion: @escaping(MoviesApiResponse) -> ()) {
+    private static var movies: [Movie] = []
+    private static var movie: [String : MovieDetail] = [:]
+    private static var comments: [String: [Comment]] = [:]
+    
+    static func fetchMovies(orderType: String, completion: @escaping([Movie]) -> ()) {
         guard let url: URL = URL(string: baseUrl + "movies?order_type=" + orderType) else {
+            return
+        }
+        
+        if movies.count != 0 {
+            print("movie list local cache")
+            completion(movies)
             return
         }
         
@@ -23,7 +33,9 @@ class BoxOfficeService {
             do {
                 let response = try MoviesApiResponse(json: json)
                 
-                completion(response)
+                self.movies = response.movies
+                
+                completion(response.movies)
             } catch {
                 NotificationCenter.default.post(name: networkErrorNotificationName, object: nil)
                 print(error)
@@ -31,17 +43,25 @@ class BoxOfficeService {
         }
     }
     
-    static func fetchMovieDetail(movieId: String, completion: @escaping(MovieDetailApiResponse) -> ()) {
+    static func fetchMovieDetail(movieId: String, completion: @escaping(MovieDetail) -> ()) {
         guard let url: URL = URL(string: baseUrl + "movie?id=" + movieId) else {
             return
         }
         
+        if let movie = movie[movieId] {
+            print("movie detail local cache")
+            completion(movie)
+            return
+        }
+        
         NetworkService.shared.fetchData(url: url) { (json) in
             
             do {
-                let movieDetailApiResponse = try MovieDetailApiResponse(json: json)
+                let response = try MovieDetailApiResponse(json: json)
                 
-                completion(movieDetailApiResponse)
+                self.movie[movieId] = response.movie
+                
+                completion(response.movie)
             } catch {
                 NotificationCenter.default.post(name: networkErrorNotificationName, object: nil)
                 print(error)
@@ -49,17 +69,25 @@ class BoxOfficeService {
         }
     }
     
-    static func fetchMovieComment(movieId: String, completion: @escaping(MovieCommentsApiResponse) -> ()) {
+    static func fetchMovieComment(movieId: String, completion: @escaping([Comment]) -> ()) {
         guard let url: URL = URL(string: baseUrl + "comments?movie_id=" + movieId) else {
+            return
+        }
+        
+        if let comments = comments[movieId] {
+            print("comments local cache \(comments.count)")
+            completion(comments)
             return
         }
         
         NetworkService.shared.fetchData(url: url) { (json) in
             
             do {
-                let movieCommentsApiResponse = try MovieCommentsApiResponse(json: json)
+                let response = try MovieCommentsApiResponse(json: json)
                 
-                completion(movieCommentsApiResponse)
+                self.comments[movieId] = response.comments
+                
+                completion(response.comments)
             } catch {
                 NotificationCenter.default.post(name: networkErrorNotificationName, object: nil)
                 print(error)
@@ -68,7 +96,6 @@ class BoxOfficeService {
     }
     
     static func registerMovieComment(id: String?, nickname: String, comment: String, rating: Double, completion: @escaping(NetworkStatus) -> ()) {
-        
         guard let url: URL = URL(string: baseUrl + "comment") else {
             return
         }
