@@ -11,6 +11,8 @@ import Cosmos
 
 class BoxOfficeDetailViewController: BaseViewController, ModalViewControllerDelegate {
 
+    @IBOutlet weak var tableView: UITableView!
+    
     var movieId: String?
     
     private let detailSection = 0
@@ -20,8 +22,6 @@ class BoxOfficeDetailViewController: BaseViewController, ModalViewControllerDele
     
     private var movieDetail: MovieDetail?
     private var comments: [Comment] = []
-    
-    @IBOutlet weak var tableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,44 +47,6 @@ class BoxOfficeDetailViewController: BaseViewController, ModalViewControllerDele
             print("cannot register comment")
         }
     }
-    
-    @objc func tappedPostContent(gesture: UITapGestureRecognizer) {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        
-        guard let boxOfficeCommentModalViewController: BoxOfficeCommentModalViewController = storyboard.instantiateViewController(withIdentifier: "BoxOfficePostCommentModal") as? BoxOfficeCommentModalViewController else {
-            return
-        }
-        boxOfficeCommentModalViewController.modalPresentationStyle = .overCurrentContext
-        boxOfficeCommentModalViewController.movieDetail = movieDetail
-        boxOfficeCommentModalViewController.delegate = self
-
-        let navBoxOfficeCommentViewController = UINavigationController(rootViewController: boxOfficeCommentModalViewController)
-
-        present(navBoxOfficeCommentViewController, animated: true, completion: nil)
-    }
-    
-    @objc func tappedBackButton() {
-        navigationController?.popViewController(animated: true)
-    }
-    
-    @objc func tappedMovieImage(tapGestureRecognizer: UITapGestureRecognizer) {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        
-        guard let boxOfficeMovieImageModalViewController: BoxOfficeMovieImageModalViewController = storyboard.instantiateViewController(withIdentifier: "BoxOfficeMovieImageModal") as? BoxOfficeMovieImageModalViewController else {
-            return
-        }
-        boxOfficeMovieImageModalViewController.modalPresentationStyle = .overCurrentContext
-        boxOfficeMovieImageModalViewController.movieImage = movieDetail?.image
-        
-        let navBoxOfficeMovieImageViewController = UINavigationController(rootViewController: boxOfficeMovieImageModalViewController)
-        
-        present(navBoxOfficeMovieImageViewController, animated: true, completion: nil)
-    }
-    
-//    private func intializeNotificationObserver() {
-//        NotificationCenter.default.addObserver(self, selector: #selector(self.didReceiveMovieDetailNotification(_:)), name: DidReceiveMovieDetailNotification, object: nil)
-//        NotificationCenter.default.addObserver(self, selector: #selector(self.didReceiveMovieCommentNotification(_:)), name: DidReceiveMovieCommentNotification, object: nil)
-//    }
     
     private func intializeViews() {
         navigationController?.navigationBar.topItem?.title = "영화목록"
@@ -142,6 +104,40 @@ class BoxOfficeDetailViewController: BaseViewController, ModalViewControllerDele
         
         return starCnt
     }
+    
+    @objc func tappedPostContent(gesture: UITapGestureRecognizer) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        
+        guard let boxOfficeCommentModalViewController: BoxOfficeCommentModalViewController = storyboard.instantiateViewController(withIdentifier: "BoxOfficePostCommentModal") as? BoxOfficeCommentModalViewController else {
+            return
+        }
+        boxOfficeCommentModalViewController.modalPresentationStyle = .overCurrentContext
+        boxOfficeCommentModalViewController.movieDetail = movieDetail
+        boxOfficeCommentModalViewController.delegate = self
+        
+        let navBoxOfficeCommentViewController = UINavigationController(rootViewController: boxOfficeCommentModalViewController)
+        
+        self.present(navBoxOfficeCommentViewController, animated: true, completion: nil)
+    }
+    
+    @objc func tappedBackButton() {
+        self.navigationController?.popViewController(animated: true)
+    }
+    
+    @objc func tappedMovieImage(tapGestureRecognizer: UITapGestureRecognizer) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        
+        guard let boxOfficeMovieImageModalViewController: BoxOfficeMovieImageModalViewController = storyboard.instantiateViewController(withIdentifier: "BoxOfficeMovieImageModal") as? BoxOfficeMovieImageModalViewController else {
+            return
+        }
+        boxOfficeMovieImageModalViewController.modalPresentationStyle = .overCurrentContext
+        boxOfficeMovieImageModalViewController.movieImage = movieDetail?.image
+        
+        let navBoxOfficeMovieImageViewController = UINavigationController(rootViewController: boxOfficeMovieImageModalViewController)
+        
+        self.present(navBoxOfficeMovieImageViewController, animated: true, completion: nil)
+    }
+    
 }
 
 extension BoxOfficeDetailViewController: UITableViewDelegate, UITableViewDataSource {

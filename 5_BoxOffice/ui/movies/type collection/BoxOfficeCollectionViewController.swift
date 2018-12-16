@@ -10,6 +10,8 @@ import UIKit
 
 class BoxOfficeCollectionViewController: BaseViewController {
 
+    @IBOutlet weak var collectionView: UICollectionView!
+    
     private let cellIdentifier = "collection_cell"
     
     private var orderType = OrderType.rate
@@ -21,14 +23,6 @@ class BoxOfficeCollectionViewController: BaseViewController {
         
         return refreshControl
     } ()
-    
-    @IBOutlet weak var collectionView: UICollectionView!
-    
-    @IBAction func tappedSettings(_ sender: UIBarButtonItem) {
-        showOrderSettingActionSheet { orderType in
-            self.fetchMoviesSettingViewController(orderType: orderType)
-        }
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -102,10 +96,6 @@ class BoxOfficeCollectionViewController: BaseViewController {
     }
     
     // Mark: - load data
-    @objc func handleRefresh(_ refreshControl: UIRefreshControl) {
-        self.fetchMovies()
-    }
-    
     private func fetchMoviesSettingViewController(orderType: OrderType) {
         self.orderType = orderType
         self.showIndicator()
@@ -125,6 +115,15 @@ class BoxOfficeCollectionViewController: BaseViewController {
         }
     }
     
+    @objc func handleRefresh(_ refreshControl: UIRefreshControl) {
+        self.fetchMovies()
+    }
+    
+    @IBAction func tappedSettings(_ sender: UIBarButtonItem) {
+        showOrderSettingActionSheet { orderType in
+            self.fetchMoviesSettingViewController(orderType: orderType)
+        }
+    }
 }
 
 extension BoxOfficeCollectionViewController: UICollectionViewDataSource, UICollectionViewDelegate {

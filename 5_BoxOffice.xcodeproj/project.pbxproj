@@ -139,6 +139,7 @@
 			isa = PBXGroup;
 			children = (
 				C22F4701214BC0F200F91E02 /* BoxOfficeDetailViewController.swift */,
+				C22416FF215DDA3A0060F95A /* BoxOfficeMovieImageModalViewController.swift */,
 				C22F4705214E5B4300F91E02 /* BoxOfficeDetailTableViewCell.swift */,
 				C22F4707214FE86300F91E02 /* BoxOfficeContentTableViewCell.swift */,
 				C22F4709214FE87400F91E02 /* BoxOfficeInfoTableViewCell.swift */,
@@ -151,7 +152,6 @@
 			isa = PBXGroup;
 			children = (
 				C220BE232157E42900DF1170 /* BoxOfficeCommentModalViewController.swift */,
-				C22416FF215DDA3A0060F95A /* BoxOfficeMovieImageModalViewController.swift */,
 			);
 			path = "movie comment";
 			sourceTree = "<group>";

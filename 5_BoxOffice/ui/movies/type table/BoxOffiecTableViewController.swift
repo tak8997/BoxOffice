@@ -10,10 +10,11 @@ import UIKit
 
 class BoxOfficeTableViewController: BaseViewController {
     
+    @IBOutlet weak var tableView: UITableView!
+    
     private let cellIdentifier = "table_cell"
     
     private var movies: [Movie] = []
-//    private var movieId: String?
     private var orderType = OrderType.rate
 
     private lazy var refreshControl: UIRefreshControl = {
@@ -23,14 +24,6 @@ class BoxOfficeTableViewController: BaseViewController {
         
         return refreshControl
     } ()
-    
-    @IBOutlet weak var tableView: UITableView!
-    
-    @IBAction func tappedSetting(_ sender: UIBarButtonItem) {
-        showOrderSettingActionSheet { orderType in
-            self.fetchMoviesSettingViewController(orderType: orderType)
-        }
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -89,10 +82,6 @@ class BoxOfficeTableViewController: BaseViewController {
     }
 
     // Mark: - load data
-    @objc func handleRefresh(_ refreshControl: UIRefreshControl) {
-        self.fetchMovies()
-    }
-    
     private func fetchMoviesSettingViewController(orderType: OrderType) {
         self.orderType = orderType
         self.showIndicator()
@@ -109,6 +98,16 @@ class BoxOfficeTableViewController: BaseViewController {
             self.refreshControl.endRefreshing()
             
             self.hideIndicator()
+        }
+    }
+    
+    @objc func handleRefresh(_ refreshControl: UIRefreshControl) {
+        self.fetchMovies()
+    }
+    
+    @IBAction func tappedSetting(_ sender: UIBarButtonItem) {
+        showOrderSettingActionSheet { orderType in
+            self.fetchMoviesSettingViewController(orderType: orderType)
         }
     }
 }
