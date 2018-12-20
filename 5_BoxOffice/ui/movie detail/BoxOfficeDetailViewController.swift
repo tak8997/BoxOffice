@@ -31,6 +31,7 @@ class BoxOfficeDetailViewController: BaseViewController, ModalViewControllerDele
         fetchMovie()
         fetchComment()
     }
+    
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
@@ -55,6 +56,7 @@ class BoxOfficeDetailViewController: BaseViewController, ModalViewControllerDele
         indicator.isHidden = true
     }
     
+    // Mark: - load data
     private func fetchMovie() {
         if let movieId = movieId {
             showIndicator()
