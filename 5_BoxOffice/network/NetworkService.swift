@@ -7,16 +7,17 @@
 //
 
 import Foundation
+import UIKit
 
 class NetworkService {
     
     static let shared = NetworkService()
     
+    private let session = URLSession.shared
+    
     private init() { }
 
     public func fetchData(url: URL, completion: @escaping (Any) -> ()) {
-        
-        let session = URLSession.shared
         
         session.dataTask(with: url) { (data, response, error) in
             guard let data = data else {
@@ -36,9 +37,23 @@ class NetworkService {
         }.resume()
     }
     
-    public func postData(request: URLRequest, completion: @escaping (Any) -> ()) {
+    public func fetchImage(imageURL: URL, completion: @escaping (UIImage, Int) -> ()) {
         
-        let session = URLSession.shared
+        session.dataTask(with: imageURL) { (data, response, error) in
+            guard
+                let data = data,
+                let image = UIImage(data: data) else {
+                    
+                return
+            }
+            
+            DispatchQueue.main.async {
+                completion(image, data.count)
+            }
+        }.resume()
+    }
+    
+    public func postData(request: URLRequest, completion: @escaping (Any) -> ()) {
         
         session.dataTask(with: request) { (data, response, error) in
             guard let data = data else {
