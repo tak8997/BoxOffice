@@ -18,7 +18,7 @@ class BoxOfficeTableViewCell: UITableViewCell {
     @IBOutlet weak var movieReservationRate: UILabel!    //예매율
     @IBOutlet weak var movieReleaseDate: UILabel!
     
-    func configure(_ movie: Movie) {
+    func configure(_ movie: Movie, tableView: UITableView, indexPath: IndexPath, cell: UITableViewCell) {
         movieTitle.text = movie.title
         movieUserRating.text = String(movie.userRating)
         movieReservationGrade.text = String(movie.reservationGrade)
@@ -37,6 +37,15 @@ class BoxOfficeTableViewCell: UITableViewCell {
         
         movieGrade.image = UIImage(named: gradeImageType)
         movieThumb.image = UIImage(named: "img_placeholder")
+    
+        BoxOfficeService.fetchImage(imageURL: movie.thumb) { (image) in
+            if let index: IndexPath = tableView.indexPath(for: cell) {
+                print("zz")
+                if index.row == indexPath.row {
+                    self.movieThumb.image = image
+                }
+            } 
+        }
     }
     
 }

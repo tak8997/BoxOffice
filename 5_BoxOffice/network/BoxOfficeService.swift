@@ -102,8 +102,12 @@ class BoxOfficeService {
         }
     }
     
-    static func fetchImage(imageURL: URL, completion: @escaping (UIImage) -> ()) {
-        if let cachedImage = ImageCache.shared.object(forKey: imageURL as AnyObject) {
+    static func fetchImage(imageURL: String, completion: @escaping (UIImage) -> ()) {
+        guard let imageURL = URL(string: imageURL) else {
+            return
+        }
+        
+        if let cachedImage = ImageCache.shared.object(forKey: imageURL.absoluteString as NSString) {
             completion(cachedImage)
             return
         } else {
@@ -112,6 +116,7 @@ class BoxOfficeService {
             if FileManager.default.fileExists(atPath: diskPath) {
                 if let image = UIImage(contentsOfFile: diskPath) {
                     completion(image)
+                    print("disk cache")
                     return
                 }
             }
@@ -120,7 +125,7 @@ class BoxOfficeService {
         NetworkService.shared.fetchImage(imageURL: imageURL) { (image, dataCount) in
             ImageCache.shared.setObject(
                 image,
-                forKey: imageURL.absoluteString as AnyObject,
+                forKey: imageURL.absoluteString as NSString,
                 cost: dataCount
             )
             

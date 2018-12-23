@@ -23,7 +23,7 @@ class BoxOfficeCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var imageHeight: NSLayoutConstraint!
     
     
-    func configure(_ movie: Movie) { // da
+    func configure(_ movie: Movie) {
         contentView.translatesAutoresizingMaskIntoConstraints = false
         contentView.frame = bounds
         
@@ -47,5 +47,11 @@ class BoxOfficeCollectionViewCell: UICollectionViewCell {
         
         movieGrade.image = UIImage(named: gradeImageType)
         movieThumb.image = UIImage(named: "img_placeholder")
+        
+//        if let url = URL(string: movie.thumb) {
+//            BoxOfficeService.fetchImage(imageURL: url) { (image) in
+//
+//            }
+//        }
     }
 }

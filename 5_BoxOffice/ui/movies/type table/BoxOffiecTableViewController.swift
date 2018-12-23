@@ -125,25 +125,25 @@ extension BoxOfficeTableViewController: UITableViewDelegate, UITableViewDataSour
      
         let movie: Movie = movies[indexPath.row]
         
-        cell.configure(movie)
+        cell.configure(movie, tableView: self.tableView, indexPath: indexPath, cell: cell)
         
-        DispatchQueue.global().async {
-            guard let thumbImageUrl: URL = URL(string: movie.thumb) else {
-                    return
-            }
-            
-            guard let thumbImageData: Data = try? Data(contentsOf: thumbImageUrl) else {
-                    return
-            }
-            
-            DispatchQueue.main.async {
-                if let index: IndexPath = self.tableView.indexPath(for: cell) {
-                    if index.row == indexPath.row {
-                        cell.movieThumb.image = UIImage(data: thumbImageData)
-                    }
-                }
-            }
-        }
+//        DispatchQueue.global().async {
+//            guard let thumbImageUrl: URL = URL(string: movie.thumb) else {
+//                    return
+//            }
+//
+//            guard let thumbImageData: Data = try? Data(contentsOf: thumbImageUrl) else {
+//                    return
+//            }
+//
+//            DispatchQueue.main.async {
+//                if let index: IndexPath = self.tableView.indexPath(for: cell) {
+//                    if index.row == indexPath.row {
+//                        cell.movieThumb.image = UIImage(data: thumbImageData)
+//                    }
+//                }
+//            }
+//        }
         
         return cell
     }
