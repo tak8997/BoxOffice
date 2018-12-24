@@ -23,7 +23,7 @@ class BoxOfficeCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var imageHeight: NSLayoutConstraint!
     
     
-    func configure(_ movie: Movie) {
+    func configure(_ movie: Movie, item: Int, index: IndexPath) {
         contentView.translatesAutoresizingMaskIntoConstraints = false
         contentView.frame = bounds
         
@@ -49,12 +49,9 @@ class BoxOfficeCollectionViewCell: UICollectionViewCell {
         movieThumb.image = UIImage(named: "img_placeholder")
         
         BoxOfficeService.fetchImage(imageURL: movie.thumb) { (image) in
-            self.movieThumb.image = image
-//                if let index: IndexPath = self.collectionView.indexPath(for: cell) {
-//                    if index.item == indexPath.item {
-//                        cell.movieThumb.image = UIImage(data: thumbImageData)
-//                    }
-//                }
+            if item == index.item {
+                self.movieThumb.image = image
+            }
         }
     }
 }
