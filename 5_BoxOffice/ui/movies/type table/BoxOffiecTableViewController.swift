@@ -125,7 +125,7 @@ extension BoxOfficeTableViewController: UITableViewDelegate, UITableViewDataSour
      
         let movie: Movie = movies[indexPath.row]
         
-        cell.configure(movie, tableView: self.tableView, indexPath: indexPath, cell: cell)
+        cell.configure(movie, row: indexPath.row, index: self.tableView.indexPath(for: cell) ?? indexPath)
         
         return cell
     }
