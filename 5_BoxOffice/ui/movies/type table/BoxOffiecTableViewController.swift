@@ -45,11 +45,10 @@ class BoxOfficeTableViewController: BaseViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        guard let boxOfficeDetailViewController = segue.destination as? BoxOfficeDetailViewController else {
-            return
-        }
-        
-        guard let _: BoxOfficeTableViewCell = sender as? BoxOfficeTableViewCell else {
+        guard
+            let boxOfficeDetailViewController = segue.destination as? BoxOfficeDetailViewController,
+            let _: BoxOfficeTableViewCell = sender as? BoxOfficeTableViewCell else {
+                
             return
         }
         
