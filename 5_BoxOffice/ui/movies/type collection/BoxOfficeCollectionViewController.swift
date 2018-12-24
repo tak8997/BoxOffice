@@ -21,7 +21,7 @@ class BoxOfficeCollectionViewController: BaseViewController {
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: #selector(handleRefresh(_:)), for: UIControlEvents.valueChanged)
         
-        return refreshControl
+        return UIRefreshControl()
     } ()
     
     override func viewDidLoad() {
@@ -44,11 +44,10 @@ class BoxOfficeCollectionViewController: BaseViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        guard let boxOfficeDetailViewController = segue.destination as? BoxOfficeDetailViewController else {
-            return
-        }
-        
-        guard let cell: UICollectionViewCell = sender as? UICollectionViewCell else {
+        guard
+            let boxOfficeDetailViewController = segue.destination as? BoxOfficeDetailViewController,
+            let cell: UICollectionViewCell = sender as? UICollectionViewCell else {
+                
             return
         }
         
@@ -61,7 +60,7 @@ class BoxOfficeCollectionViewController: BaseViewController {
     }
     
     private func intializeRefreshControl() {
-        collectionView.addSubview(refreshControl)
+        self.collectionView.addSubview(refreshControl)
     }
     
     private func intializeViews() {
@@ -69,7 +68,7 @@ class BoxOfficeCollectionViewController: BaseViewController {
         initializeNavigationBar()
         initializeFlowLayout()
         
-        indicator.isHidden = true
+        self.indicator.isHidden = true
     }
     
     
@@ -139,24 +138,7 @@ extension BoxOfficeCollectionViewController: UICollectionViewDataSource, UIColle
         
         let movie: Movie = movies[indexPath.item]
         
-        cell.configure(movie)
-        
-//        DispatchQueue.global().async {
-//            guard
-//                let thumbImageUrl: URL = URL(string: movie.thumb),
-//                let thumbImageData: Data = try? Data(contentsOf: thumbImageUrl)else {
-//                    
-//                return
-//            }
-//            
-//            DispatchQueue.main.async {
-//                if let index: IndexPath = self.collectionView.indexPath(for: cell) {
-//                    if index.item == indexPath.item {
-//                        cell.movieThumb.image = UIImage(data: thumbImageData)
-//                    }
-//                }
-//            }
-//        }
+        cell.configure(movie, item: indexPath.item, index: self.collectionView.indexPath(for: cell) ?? indexPath)
         
         return cell
     }

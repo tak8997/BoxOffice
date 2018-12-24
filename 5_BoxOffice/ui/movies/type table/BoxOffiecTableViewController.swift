@@ -45,11 +45,10 @@ class BoxOfficeTableViewController: BaseViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        guard let boxOfficeDetailViewController = segue.destination as? BoxOfficeDetailViewController else {
-            return
-        }
-        
-        guard let _: BoxOfficeTableViewCell = sender as? BoxOfficeTableViewCell else {
+        guard
+            let boxOfficeDetailViewController = segue.destination as? BoxOfficeDetailViewController,
+            let _: BoxOfficeTableViewCell = sender as? BoxOfficeTableViewCell else {
+                
             return
         }
         
@@ -125,7 +124,7 @@ extension BoxOfficeTableViewController: UITableViewDelegate, UITableViewDataSour
      
         let movie: Movie = movies[indexPath.row]
         
-        cell.configure(movie, tableView: self.tableView, indexPath: indexPath, cell: cell)
+        cell.configure(movie, row: indexPath.row, index: self.tableView.indexPath(for: cell) ?? indexPath)
         
         return cell
     }
