@@ -30,6 +30,7 @@ class BoxOfficeCollectionViewCell: UICollectionViewCell {
         imageWidth.constant = UIScreen.main.bounds.width / 2 - 20
         imageHeight.constant = UIScreen.main.bounds.height / 2 - 60 - 85
         
+        movieTitle.text = movie.title
         movieUserRating.text = "(\(movie.userRating))"
         movieReservationGrade.text = "\(movie.reservationGrade)위"
         movieReservationRate.text = "\(movie.reservationRate)%"
