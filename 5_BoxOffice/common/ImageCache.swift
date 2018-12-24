@@ -10,8 +10,8 @@ import Foundation
 import UIKit
 
 class ImageCache {
-    static let shared: NSCache = { () -> NSCache<AnyObject, UIImage> in
-        let cache = NSCache<AnyObject, UIImage>()
+    static let shared: NSCache = { () -> NSCache<NSString, UIImage> in
+        let cache = NSCache<NSString, UIImage>()
         
         cache.name = "BoxOfficeImageCache"
         cache.countLimit = 20

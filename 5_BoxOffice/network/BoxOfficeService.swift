@@ -16,6 +16,16 @@ class BoxOfficeService {
     private static var cachedMovies: [String : [Movie]] = [:]
     private static var cachedMovie: [String : MovieDetail] = [:]
     private static var cachedComments: [String: [Comment]] = [:]
+    
+    private static var imageURL: URL?
+    
+    private static var diskPath: String {
+        let diskPaths = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.cachesDirectory, FileManager.SearchPathDomainMask.userDomainMask, true)
+        let cacheDirectory = diskPaths[0] as NSString
+        let rtnPath = cacheDirectory.appendingPathComponent("\(String(describing: self.imageURL?.absoluteString.hashValue))")
+        
+        return rtnPath
+    }
 
     static func fetchMovies(orderType: String, completion: @escaping ([Movie]) -> ()) {
         guard let url: URL = URL(string: baseUrl + "movies?order_type=" + orderType) else {
@@ -29,7 +39,6 @@ class BoxOfficeService {
         }
         
         NetworkService.shared.fetchData(url: url) { (json) in
-            
             do {
                 let response = try MoviesApiResponse(json: json)
                 
@@ -55,7 +64,6 @@ class BoxOfficeService {
         }
         
         NetworkService.shared.fetchData(url: url) { (json) in
-            
             do {
                 let response = try MovieDetailApiResponse(json: json)
                 
@@ -81,7 +89,6 @@ class BoxOfficeService {
         }
         
         NetworkService.shared.fetchData(url: url) { (json) in
-            
             do {
                 let response = try MovieCommentsApiResponse(json: json)
                 
@@ -95,16 +102,30 @@ class BoxOfficeService {
         }
     }
     
-    static func fetchImage(imageURL: URL, completion: @escaping (UIImage) -> ()) {
-        if let cachedImage = ImageCache.shared.object(forKey: imageURL as AnyObject) {
+    static func fetchImage(imageURL: String, completion: @escaping (UIImage) -> ()) {
+        guard let imageURL = URL(string: imageURL) else {
+            return
+        }
+        
+        if let cachedImage = ImageCache.shared.object(forKey: imageURL.absoluteString as NSString) {
             completion(cachedImage)
             return
+        } else {
+            self.imageURL = imageURL
+            
+            if FileManager.default.fileExists(atPath: diskPath) {
+                if let image = UIImage(contentsOfFile: diskPath) {
+                    completion(image)
+                    print("disk cache")
+                    return
+                }
+            }
         }
         
         NetworkService.shared.fetchImage(imageURL: imageURL) { (image, dataCount) in
             ImageCache.shared.setObject(
                 image,
-                forKey: imageURL.absoluteString as AnyObject,
+                forKey: imageURL.absoluteString as NSString,
                 cost: dataCount
             )
             
