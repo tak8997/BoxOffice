@@ -48,10 +48,13 @@ class BoxOfficeCollectionViewCell: UICollectionViewCell {
         movieGrade.image = UIImage(named: gradeImageType)
         movieThumb.image = UIImage(named: "img_placeholder")
         
-//        if let url = URL(string: movie.thumb) {
-//            BoxOfficeService.fetchImage(imageURL: url) { (image) in
-//
-//            }
-//        }
+        BoxOfficeService.fetchImage(imageURL: movie.thumb) { (image) in
+            self.movieThumb.image = image
+//                if let index: IndexPath = self.collectionView.indexPath(for: cell) {
+//                    if index.item == indexPath.item {
+//                        cell.movieThumb.image = UIImage(data: thumbImageData)
+//                    }
+//                }
+        }
     }
 }

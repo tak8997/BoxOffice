@@ -141,22 +141,22 @@ extension BoxOfficeCollectionViewController: UICollectionViewDataSource, UIColle
         
         cell.configure(movie)
         
-        DispatchQueue.global().async {
-            guard
-                let thumbImageUrl: URL = URL(string: movie.thumb),
-                let thumbImageData: Data = try? Data(contentsOf: thumbImageUrl)else {
-                    
-                return
-            }
-            
-            DispatchQueue.main.async {
-                if let index: IndexPath = self.collectionView.indexPath(for: cell) {
-                    if index.item == indexPath.item {
-                        cell.movieThumb.image = UIImage(data: thumbImageData)
-                    }
-                }
-            }
-        }
+//        DispatchQueue.global().async {
+//            guard
+//                let thumbImageUrl: URL = URL(string: movie.thumb),
+//                let thumbImageData: Data = try? Data(contentsOf: thumbImageUrl)else {
+//                    
+//                return
+//            }
+//            
+//            DispatchQueue.main.async {
+//                if let index: IndexPath = self.collectionView.indexPath(for: cell) {
+//                    if index.item == indexPath.item {
+//                        cell.movieThumb.image = UIImage(data: thumbImageData)
+//                    }
+//                }
+//            }
+//        }
         
         return cell
     }

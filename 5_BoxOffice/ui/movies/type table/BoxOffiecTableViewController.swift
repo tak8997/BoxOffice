@@ -60,14 +60,14 @@ class BoxOfficeTableViewController: BaseViewController {
     }
     
     private func intializeRefreshControl() {
-        tableView.addSubview(refreshControl)
+        self.tableView.addSubview(refreshControl)
     }
 
     private func intializeViews() {
         intializeStatusBar()
         intializeNavigationBar()
         
-        indicator.isHidden = true
+        self.indicator.isHidden = true
     }
     
     private func intializeNavigationBar() {
@@ -126,24 +126,6 @@ extension BoxOfficeTableViewController: UITableViewDelegate, UITableViewDataSour
         let movie: Movie = movies[indexPath.row]
         
         cell.configure(movie, tableView: self.tableView, indexPath: indexPath, cell: cell)
-        
-//        DispatchQueue.global().async {
-//            guard let thumbImageUrl: URL = URL(string: movie.thumb) else {
-//                    return
-//            }
-//
-//            guard let thumbImageData: Data = try? Data(contentsOf: thumbImageUrl) else {
-//                    return
-//            }
-//
-//            DispatchQueue.main.async {
-//                if let index: IndexPath = self.tableView.indexPath(for: cell) {
-//                    if index.row == indexPath.row {
-//                        cell.movieThumb.image = UIImage(data: thumbImageData)
-//                    }
-//                }
-//            }
-//        }
         
         return cell
     }
