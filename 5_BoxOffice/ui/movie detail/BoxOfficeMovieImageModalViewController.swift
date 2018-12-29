@@ -33,22 +33,16 @@ class BoxOfficeMovieImageModalViewController: BaseViewController {
     }
     
     private func fetchMovieImage() {
+        guard let movieImage = self.movieImage else {
+            return
+        }
+        
         showIndicator()
         
-        DispatchQueue.global().async {
-            guard
-                let imageUrl: String = self.movieImage,
-                let url: URL = URL(string: imageUrl),
-                let data: Data = try? Data(contentsOf: url) else {
-                    
-                    return
-            }
+        BoxOfficeService.fetchImage(imageURL: movieImage) { (image) in
+            self.moviePoster.image = image
             
-            DispatchQueue.main.async {
-                self.moviePoster.image = UIImage(data: data)
-                
-                self.hideIndicator()
-            }
+            self.hideIndicator()
         }
     }
     
@@ -61,12 +55,10 @@ class BoxOfficeMovieImageModalViewController: BaseViewController {
     }
     
     private func intializeNavigationBar() {
-        let lightBlue = "#84A3F6"
-        
         navigationController?.navigationBar.topItem?.title = "영화 포스터"
         navigationController?.navigationBar.topItem?.leftBarButtonItem = UIBarButtonItem(title: "취소", style: .plain, target: self, action: #selector(tappedModalDismiss(sender:)) )
         navigationController?.navigationBar.tintColor = UIColor.white
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor : UIColor.white]
-        navigationController?.navigationBar.barTintColor = lightBlue.hexStringToUIColor()
+        navigationController?.navigationBar.barTintColor = "#84A3F6".hexStringToUIColor()
     }
 }
