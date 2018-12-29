@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3BABC2B721D7AC84007865B8 /* MovieGrade.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BABC2B621D7AC84007865B8 /* MovieGrade.swift */; };
 		7D3F600DF83539A25E8DE8F8 /* Pods_5_BoxOffice.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AEA268B3C3D39058ADD0CD6C /* Pods_5_BoxOffice.framework */; };
 		C2035F37215DCDA800718808 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C2035F36215DCDA800718808 /* Assets.xcassets */; };
 		C2108F0E21C4F51C00FC4865 /* BoxOfficeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2108F0D21C4F51C00FC4865 /* BoxOfficeService.swift */; };
@@ -41,6 +42,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3BABC2B621D7AC84007865B8 /* MovieGrade.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieGrade.swift; sourceTree = "<group>"; };
 		4F30813297B9E2C6C354C911 /* Pods-5_BoxOffice.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-5_BoxOffice.release.xcconfig"; path = "Pods/Target Support Files/Pods-5_BoxOffice/Pods-5_BoxOffice.release.xcconfig"; sourceTree = "<group>"; };
 		523B713AA93191D45C64346B /* Pods-5_BoxOffice.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-5_BoxOffice.debug.xcconfig"; path = "Pods/Target Support Files/Pods-5_BoxOffice/Pods-5_BoxOffice.debug.xcconfig"; sourceTree = "<group>"; };
 		AEA268B3C3D39058ADD0CD6C /* Pods_5_BoxOffice.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_5_BoxOffice.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -187,6 +189,7 @@
 				C22F46FF21498F2100F91E02 /* OrderType.swift */,
 				C2108F1D21C6799900FC4865 /* StarCount.swift */,
 				C29534C521CE6D68009FF64E /* ImageCache.swift */,
+				3BABC2B621D7AC84007865B8 /* MovieGrade.swift */,
 			);
 			path = common;
 			sourceTree = "<group>";
@@ -385,6 +388,7 @@
 				C2925A122140110000A61282 /* SupportExtension.swift in Sources */,
 				C2B711712144E98800C99328 /* BoxOfficeTableViewCell.swift in Sources */,
 				C22F470E214FEA2800F91E02 /* BoxOfficeCommentTableViewCell.swift in Sources */,
+				3BABC2B721D7AC84007865B8 /* MovieGrade.swift in Sources */,
 				C2B711742144EEC700C99328 /* Movie.swift in Sources */,
 				C2108F1421C61DED00FC4865 /* UIColor+Styleguide.swift in Sources */,
 				C22F4702214BC0F200F91E02 /* BoxOfficeDetailViewController.swift in Sources */,
