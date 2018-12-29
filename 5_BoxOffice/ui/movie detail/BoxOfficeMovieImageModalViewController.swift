@@ -10,9 +10,9 @@ import UIKit
 
 class BoxOfficeMovieImageModalViewController: BaseViewController {
 
-    var movieImage: String?
-    
     @IBOutlet weak var moviePoster: UIImageView!
+    
+    var movieImage: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,10 +26,6 @@ class BoxOfficeMovieImageModalViewController: BaseViewController {
         super.viewWillDisappear(animated)
         
         hideIndicator()
-    }
-    
-    @objc func tappedModalDismiss(sender: UIBarButtonItem) {
-        dismiss(animated: true, completion: nil)
     }
     
     private func fetchMovieImage() {
@@ -61,4 +57,9 @@ class BoxOfficeMovieImageModalViewController: BaseViewController {
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor : UIColor.white]
         navigationController?.navigationBar.barTintColor = "#84A3F6".hexStringToUIColor()
     }
+    
+    @objc func tappedModalDismiss(sender: UIBarButtonItem) {
+        dismiss(animated: true, completion: nil)
+    }
+    
 }
