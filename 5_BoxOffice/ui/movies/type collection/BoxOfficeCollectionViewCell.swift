@@ -24,30 +24,19 @@ class BoxOfficeCollectionViewCell: UICollectionViewCell {
     
     
     func configure(_ movie: Movie, item: Int, index: IndexPath) {
-        contentView.translatesAutoresizingMaskIntoConstraints = false
-        contentView.frame = bounds
+        self.contentView.translatesAutoresizingMaskIntoConstraints = false
+        self.contentView.frame = bounds
         
-        imageWidth.constant = UIScreen.main.bounds.width / 2 - 20
-        imageHeight.constant = UIScreen.main.bounds.height / 2 - 60 - 85
+        self.imageWidth.constant = UIScreen.main.bounds.width / 2 - 20
+        self.imageHeight.constant = UIScreen.main.bounds.height / 2 - 60 - 85
         
-        movieTitle.text = movie.title
-        movieUserRating.text = "(\(movie.userRating))"
-        movieReservationGrade.text = "\(movie.reservationGrade)위"
-        movieReservationRate.text = "\(movie.reservationRate)%"
-        movieReleaseDate.text = movie.date
-        
-        let gradeImageType: String
-        
-        switch movie.grade {
-        case 0: gradeImageType = "ic_12"
-        case 12: gradeImageType = "ic_15"
-        case 15: gradeImageType = "ic_19"
-        case 19: gradeImageType = "ic_allages"
-        default: gradeImageType = "ic_allages"
-        }
-        
-        movieGrade.image = UIImage(named: gradeImageType)
-        movieThumb.image = UIImage(named: "img_placeholder")
+        self.movieTitle.text = movie.title
+        self.movieUserRating.text = "(\(movie.userRating))"
+        self.movieReservationGrade.text = "\(movie.reservationGrade)위"
+        self.movieReservationRate.text = "\(movie.reservationRate)%"
+        self.movieReleaseDate.text = movie.date
+        self.movieGrade.image = UIImage(named: MovieGrade(rawValue: movie.grade)?.movieGrade ?? "")
+        self.movieThumb.image = UIImage(named: "img_placeholder")
         
         BoxOfficeService.fetchImage(imageURL: movie.thumb) { (image) in
             if item == index.item {
