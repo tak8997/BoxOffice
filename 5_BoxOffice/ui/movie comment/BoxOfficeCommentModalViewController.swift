@@ -106,17 +106,7 @@ class BoxOfficeCommentModalViewController: BaseViewController {
         
         movieTitleLabel.text = movieDetail?.title
         
-        let gradeImageType: String
-        
-        switch movieDetail?.grade {
-        case 0: gradeImageType = "ic_12"
-        case 12: gradeImageType = "ic_15"
-        case 15: gradeImageType = "ic_19"
-        case 19: gradeImageType = "ic_allages"
-        default: gradeImageType = "ic_allages"
-        }
-        
-        movieGradeImage.image = UIImage(named: gradeImageType)
+        movieGradeImage.image = UIImage(named: MovieGrade(rawValue: movieDetail?.grade ?? 12)?.movieGrade ?? "")
         
         commentTextView?.layer.borderWidth = 1
         commentTextView?.layer.borderColor = UIColor.red.cgColor
@@ -171,16 +161,15 @@ class BoxOfficeCommentModalViewController: BaseViewController {
     }
     
     @objc func tappedCommentPostSuccess(sender: UIBarButtonItem) {
-        let userNickname = userNicknameTextField.text
-        let userComment = commentTextView.text
-        let userRating = userRatingStarView.rating
-        
-        guard let nickname = userNickname, let comment = userComment else {
+        guard
+            let nickname = userNicknameTextField.text,
+            let comment = commentTextView.text else {
+                
             return
         }
         
-        if !nickname.isEmpty && !comment.isEmpty && userRating != 0.0 {
-            registerMovieComment(id: movieDetail?.id, nickname: nickname, comment: comment, rating: userRating)
+        if !nickname.isEmpty && !comment.isEmpty && userRatingStarView.rating != 0.0 {
+            registerMovieComment(id: movieDetail?.id, nickname: nickname, comment: comment, rating: userRatingStarView.rating)
         } else {
             showAlertController()
         }

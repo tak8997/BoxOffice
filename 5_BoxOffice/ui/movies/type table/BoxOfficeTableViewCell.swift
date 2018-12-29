@@ -19,24 +19,13 @@ class BoxOfficeTableViewCell: UITableViewCell {
     @IBOutlet weak var movieReleaseDate: UILabel!
     
     func configure(_ movie: Movie, row: Int, index: IndexPath) {
-        movieTitle.text = movie.title
-        movieUserRating.text = String(movie.userRating)
-        movieReservationGrade.text = String(movie.reservationGrade)
-        movieReservationRate.text = String(movie.reservationRate)
-        movieReleaseDate.text = movie.date
-        
-        let gradeImageType: String
-        
-        switch movie.grade {
-        case 0: gradeImageType = "ic_12"
-        case 12: gradeImageType = "ic_15"
-        case 15: gradeImageType = "ic_19"
-        case 19: gradeImageType = "ic_allages"
-        default: gradeImageType = "ic_allages"
-        }
-        
-        movieGrade.image = UIImage(named: gradeImageType)
-        movieThumb.image = UIImage(named: "img_placeholder")
+        self.movieTitle.text = movie.title
+        self.movieUserRating.text = String(movie.userRating)
+        self.movieReservationGrade.text = String(movie.reservationGrade)
+        self.movieReservationRate.text = String(movie.reservationRate)
+        self.movieReleaseDate.text = movie.date
+        self.movieGrade.image = UIImage(named: MovieGrade(rawValue: movie.grade)?.movieGrade ?? "")
+        self.movieThumb.image = UIImage(named: "img_placeholder")
     
         BoxOfficeService.fetchImage(imageURL: movie.thumb) { (image) in
             if row == index.row {

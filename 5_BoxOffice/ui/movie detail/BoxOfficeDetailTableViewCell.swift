@@ -24,8 +24,8 @@ class BoxOfficeDetailTableViewCell: UITableViewCell {
     @IBOutlet weak var movieAudienceCount: UILabel!
     
     func configure(movieDetail: MovieDetail?) {
-        movieTitle.text = movieDetail?.title
-        movieGenre.text = movieDetail?.genre
+        self.movieTitle.text = movieDetail?.title
+        self.movieGenre.text = movieDetail?.genre
         
         if  let duration = movieDetail?.duration,
             let grade = movieDetail?.reservationGrade,
@@ -34,31 +34,21 @@ class BoxOfficeDetailTableViewCell: UITableViewCell {
             let audience = movieDetail?.audience,
             let date = movieDetail?.date {
             
-            movieDuration.text = "\(duration)분"
-            movieReservationGrade.text = "\(grade)위"
-            movieReservationRate.text = "\(rate)%"
-            movieUserRating.text = String(rating)
-            movieAudienceCount.text = audience.convertNumberToDecimalFormatter()
-            movieDate.text = "\(date)개봉"
+            self.movieDuration.text = "\(duration)분"
+            self.movieReservationGrade.text = "\(grade)위"
+            self.movieReservationRate.text = "\(rate)%"
+            self.movieUserRating.text = String(rating)
+            self.movieAudienceCount.text = audience.convertNumberToDecimalFormatter()
+            self.movieDate.text = "\(date)개봉"
             
             let startCount: Double = StarCount(rating: rating).getStartCount()
             
-            movieUserRatingStar.settings.updateOnTouch = false
-            movieUserRatingStar.rating = startCount
+            self.movieUserRatingStar.settings.updateOnTouch = false
+            self.movieUserRatingStar.rating = startCount
         }
         
-        let gradeImageType: String
-        
-        switch movieDetail?.grade {
-        case 0: gradeImageType = "ic_12"
-        case 12: gradeImageType = "ic_15"
-        case 15: gradeImageType = "ic_19"
-        case 19: gradeImageType = "ic_allages"
-        default: gradeImageType = "ic_allages"
-        }
-        
-        movieGrade.image = UIImage(named: gradeImageType)
-        movieImage.image = UIImage(named: "img_placeholder")
-        movieImage.isUserInteractionEnabled = true        
+        self.movieGrade.image = UIImage(named: MovieGrade(rawValue: movieDetail?.grade ?? 12)?.movieGrade ?? "")
+        self.movieImage.image = UIImage(named: "img_placeholder")
+        self.movieImage.isUserInteractionEnabled = true        
     }
 }
