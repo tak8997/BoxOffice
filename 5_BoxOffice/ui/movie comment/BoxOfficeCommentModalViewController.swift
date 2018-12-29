@@ -169,7 +169,7 @@ class BoxOfficeCommentModalViewController: BaseViewController {
         }
         
         if !nickname.isEmpty && !comment.isEmpty && userRatingStarView.rating != 0.0 {
-            registerMovieComment(id: movieDetail?.id, nickname: nickname, comment: comment, rating: userRating)
+            registerMovieComment(id: movieDetail?.id, nickname: nickname, comment: comment, rating: userRatingStarView.rating)
         } else {
             showAlertController()
         }
