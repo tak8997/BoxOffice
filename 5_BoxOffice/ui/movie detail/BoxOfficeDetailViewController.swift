@@ -31,7 +31,6 @@ class BoxOfficeDetailViewController: BaseViewController, ModalViewControllerDele
         fetchMovie()
         fetchComment()
     }
-    
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
