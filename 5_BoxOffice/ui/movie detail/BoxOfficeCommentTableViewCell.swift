@@ -22,19 +22,10 @@ class BoxOfficeCommentTableViewCell: UITableViewCell {
     @IBOutlet weak var userComment: UILabel!
     
     func configure(comment: Comment) {
-        let date = Date(timeIntervalSince1970: comment.timestamp)
-        let dateFormatter = DateFormatter()
-        dateFormatter.timeZone = TimeZone(abbreviation: "GMT")
-        dateFormatter.locale = NSLocale.current
-        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-        let strDate = dateFormatter.string(from: date)
-        
-        let starCount = StarCount(rating: comment.rating).getStartCount()
-        
         userId.text = comment.writer
-        userCommentDate.text = strDate
+        userCommentDate.text = comment.timestamp.convertDateFormatter()
         userComment.text = comment.contents
-        userRatingStar.rating = starCount
+        userRatingStar.rating = StarCount(rating: comment.rating).getStartCount()
         userRatingStar.settings.updateOnTouch = false
     }
 }

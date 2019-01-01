@@ -31,7 +31,6 @@ class BoxOfficeDetailViewController: BaseViewController, ModalViewControllerDele
         fetchMovie()
         fetchComment()
     }
-    
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
@@ -109,8 +108,10 @@ class BoxOfficeDetailViewController: BaseViewController, ModalViewControllerDele
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         
         guard let boxOfficeMovieImageModalViewController: BoxOfficeMovieImageModalViewController = storyboard.instantiateViewController(withIdentifier: "BoxOfficeMovieImageModal") as? BoxOfficeMovieImageModalViewController else {
+            
             return
         }
+        
         boxOfficeMovieImageModalViewController.modalPresentationStyle = .overCurrentContext
         boxOfficeMovieImageModalViewController.movieImage = movieDetail?.image
         
@@ -152,22 +153,7 @@ extension BoxOfficeDetailViewController: UITableViewDelegate, UITableViewDataSou
             
             let movieDetail = self.movieDetail
             
-            cell.configure(movieDetail: movieDetail)
-            
-            DispatchQueue.global().async {
-                guard
-                    let imageUrl = movieDetail?.image,
-                    let url: URL = URL(string: imageUrl),
-                    let data: Data = try? Data(contentsOf: url) else {
-                        
-                    return
-                }
-                
-                DispatchQueue.main.async {
-                    cell.movieImage.image = UIImage(data: data)
-                    cell.movieImage.addGestureRecognizer(tapGestureRecognizer)
-                }
-            }
+            cell.configure(movieDetail: movieDetail, tapGestureRecognizer: tapGestureRecognizer)
             
             return cell
         case synopsisSection:
