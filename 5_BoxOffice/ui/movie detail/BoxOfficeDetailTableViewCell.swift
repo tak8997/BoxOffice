@@ -23,7 +23,7 @@ class BoxOfficeDetailTableViewCell: UITableViewCell {
     @IBOutlet weak var movieUserRatingStar: CosmosView!
     @IBOutlet weak var movieAudienceCount: UILabel!
     
-    func configure(movieDetail: MovieDetail?) {
+    func configure(movieDetail: MovieDetail?, tapGestureRecognizer: UITapGestureRecognizer) {
         self.movieTitle.text = movieDetail?.title
         self.movieGenre.text = movieDetail?.genre
         
@@ -49,6 +49,11 @@ class BoxOfficeDetailTableViewCell: UITableViewCell {
         
         self.movieGrade.image = UIImage(named: MovieGrade(rawValue: movieDetail?.grade ?? 12)?.movieGrade ?? "")
         self.movieImage.image = UIImage(named: "img_placeholder")
-        self.movieImage.isUserInteractionEnabled = true        
+        self.movieImage.isUserInteractionEnabled = true
+  
+        BoxOfficeService.fetchImage(imageURL: movieDetail?.image ?? "") { (image) in
+            self.movieImage.image = image
+            self.movieImage.addGestureRecognizer(tapGestureRecognizer)
+        }
     }
 }
