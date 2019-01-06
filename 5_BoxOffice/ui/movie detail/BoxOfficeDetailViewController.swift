@@ -9,7 +9,7 @@
 import UIKit
 import Cosmos
 
-class BoxOfficeDetailViewController: BaseViewController, ModalViewControllerDelegate {
+class BoxOfficeDetailViewController: BaseViewController {
 
     @IBOutlet weak var tableView: UITableView!
     
@@ -36,15 +36,6 @@ class BoxOfficeDetailViewController: BaseViewController, ModalViewControllerDele
         super.viewWillDisappear(animated)
         
         hideIndicator()
-    }
-    
-    func sendStatus(status: NetworkStatus) {
-        if status == NetworkStatus.success {
-            fetchComment()
-            print("success register comment")
-        } else if status == NetworkStatus.failure {
-            print("cannot register comment")
-        }
     }
     
     private func intializeViews() {
@@ -120,6 +111,17 @@ class BoxOfficeDetailViewController: BaseViewController, ModalViewControllerDele
         self.present(navBoxOfficeMovieImageViewController, animated: true, completion: nil)
     }
     
+}
+
+extension BoxOfficeDetailViewController: ModalViewControllerDelegate {
+    func sendStatus(status: NetworkStatus) {
+        if status == NetworkStatus.success {
+            fetchComment()
+            print("success register comment")
+        } else if status == NetworkStatus.failure {
+            print("cannot register comment")
+        }
+    }
 }
 
 extension BoxOfficeDetailViewController: UITableViewDelegate, UITableViewDataSource {
