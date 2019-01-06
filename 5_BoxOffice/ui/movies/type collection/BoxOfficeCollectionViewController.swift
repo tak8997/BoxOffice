@@ -64,7 +64,6 @@ class BoxOfficeCollectionViewController: BaseViewController {
     }
     
     private func intializeViews() {
-        initializeStatusBar()
         initializeNavigationBar()
         initializeFlowLayout()
         
@@ -88,10 +87,6 @@ class BoxOfficeCollectionViewController: BaseViewController {
         navigationController?.navigationBar.tintColor = UIColor.white
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor : UIColor.white]
         navigationController?.navigationBar.barTintColor = UIColor.lightBlue
-    }
-    
-    private func initializeStatusBar() {
-        UIApplication.shared.statusBarView?.backgroundColor = UIColor.lightBlue
     }
     
     // Mark: - load data

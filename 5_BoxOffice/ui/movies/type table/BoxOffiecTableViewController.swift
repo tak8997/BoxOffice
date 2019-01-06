@@ -63,7 +63,6 @@ class BoxOfficeTableViewController: BaseViewController {
     }
 
     private func intializeViews() {
-        intializeStatusBar()
         intializeNavigationBar()
         
         self.indicator.isHidden = true
@@ -74,10 +73,6 @@ class BoxOfficeTableViewController: BaseViewController {
         self.navigationController?.navigationBar.tintColor = UIColor.white
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor : UIColor.white]
         self.navigationController?.navigationBar.barTintColor = UIColor.lightBlue
-    }
-    
-    private func intializeStatusBar() {
-        UIApplication.shared.statusBarView?.backgroundColor = UIColor.lightBlue
     }
 
     // Mark: - load data
