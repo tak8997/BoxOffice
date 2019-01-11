@@ -31,6 +31,7 @@
 		C22F470A214FE87400F91E02 /* BoxOfficeInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C22F4709214FE87400F91E02 /* BoxOfficeInfoTableViewCell.swift */; };
 		C22F470E214FEA2800F91E02 /* BoxOfficeCommentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C22F470D214FEA2800F91E02 /* BoxOfficeCommentTableViewCell.swift */; };
 		C23375C0215A07E200CDA33D /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C23375BF215A07E200CDA33D /* BaseViewController.swift */; };
+		C253D44E21E871B7008C18CA /* StarRatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C253D44D21E871B7008C18CA /* StarRatingView.swift */; };
 		C26962D721554C4000A3EEC3 /* MovieDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = C26962D621554C4000A3EEC3 /* MovieDetail.swift */; };
 		C29259FF213FEDAB00A61282 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C29259FE213FEDAB00A61282 /* AppDelegate.swift */; };
 		C2925A01213FEDAB00A61282 /* BoxOffiecTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2925A00213FEDAB00A61282 /* BoxOffiecTableViewController.swift */; };
@@ -69,6 +70,7 @@
 		C22F4709214FE87400F91E02 /* BoxOfficeInfoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxOfficeInfoTableViewCell.swift; sourceTree = "<group>"; };
 		C22F470D214FEA2800F91E02 /* BoxOfficeCommentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxOfficeCommentTableViewCell.swift; sourceTree = "<group>"; };
 		C23375BF215A07E200CDA33D /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		C253D44D21E871B7008C18CA /* StarRatingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarRatingView.swift; sourceTree = "<group>"; };
 		C26962D621554C4000A3EEC3 /* MovieDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetail.swift; sourceTree = "<group>"; };
 		C29259FB213FEDAB00A61282 /* 5_BoxOffice.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = 5_BoxOffice.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C29259FE213FEDAB00A61282 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -114,14 +116,14 @@
 			path = "supporting files";
 			sourceTree = "<group>";
 		};
-		C2108F0821C4E69A00FC4865 /* ui */ = {
+		C2108F0821C4E69A00FC4865 /* screen */ = {
 			isa = PBXGroup;
 			children = (
 				C2108F0B21C4F14100FC4865 /* movie comment */,
 				C2108F0A21C4F0B600FC4865 /* movie detail */,
 				C2108F0921C4F08400FC4865 /* movies */,
 			);
-			path = ui;
+			path = screen;
 			sourceTree = "<group>";
 		};
 		C2108F0921C4F08400FC4865 /* movies */ = {
@@ -183,6 +185,14 @@
 			path = "type collection";
 			sourceTree = "<group>";
 		};
+		C253D44C21E87150008C18CA /* view */ = {
+			isa = PBXGroup;
+			children = (
+				C253D44D21E871B7008C18CA /* StarRatingView.swift */,
+			);
+			path = view;
+			sourceTree = "<group>";
+		};
 		C26962D32155481300A3EEC3 /* common */ = {
 			isa = PBXGroup;
 			children = (
@@ -217,12 +227,13 @@
 		C29259FD213FEDAB00A61282 /* 5_BoxOffice */ = {
 			isa = PBXGroup;
 			children = (
+				C253D44C21E87150008C18CA /* view */,
 				C2108F0C21C4F3CC00FC4865 /* network */,
 				C2108F0721C4E5DF00FC4865 /* supporting files */,
 				C26962D32155481300A3EEC3 /* common */,
 				C2B711722144EEB300C99328 /* model */,
 				C2925A10214010EE00A61282 /* extension */,
-				C2108F0821C4E69A00FC4865 /* ui */,
+				C2108F0821C4E69A00FC4865 /* screen */,
 			);
 			path = 5_BoxOffice;
 			sourceTree = "<group>";
@@ -392,6 +403,7 @@
 				C2B711712144E98800C99328 /* BoxOfficeTableViewCell.swift in Sources */,
 				C22F470E214FEA2800F91E02 /* BoxOfficeCommentTableViewCell.swift in Sources */,
 				3BABC2B921D7C993007865B8 /* UIApplication.swift in Sources */,
+				C253D44E21E871B7008C18CA /* StarRatingView.swift in Sources */,
 				3BABC2B721D7AC84007865B8 /* MovieGrade.swift in Sources */,
 				C2B711742144EEC700C99328 /* Movie.swift in Sources */,
 				C2108F1421C61DED00FC4865 /* UIColor+Styleguide.swift in Sources */,
