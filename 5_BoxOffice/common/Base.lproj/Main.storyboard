@@ -525,48 +525,24 @@
                                                                         <constraint firstAttribute="width" constant="1" id="ewd-PI-GOC"/>
                                                                     </constraints>
                                                                 </view>
-                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TZW-Xn-JLG" customClass="CosmosView" customModule="Cosmos">
-                                                                    <rect key="frame" x="0.5" y="50.5" width="100" height="16"/>
-                                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                    <userDefinedRuntimeAttributes>
-                                                                        <userDefinedRuntimeAttribute type="number" keyPath="totalStars">
-                                                                            <integer key="value" value="5"/>
-                                                                        </userDefinedRuntimeAttribute>
-                                                                        <userDefinedRuntimeAttribute type="number" keyPath="starSize">
-                                                                            <real key="value" value="16"/>
-                                                                        </userDefinedRuntimeAttribute>
-                                                                        <userDefinedRuntimeAttribute type="color" keyPath="filledColor">
-                                                                            <color key="value" red="0.97272387390000004" green="1" blue="0.1755811441" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                                                        </userDefinedRuntimeAttribute>
-                                                                        <userDefinedRuntimeAttribute type="color" keyPath="emptyBorderColor">
-                                                                            <color key="value" red="0.79568086140000005" green="0.79568086140000005" blue="0.79568086140000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                                                        </userDefinedRuntimeAttribute>
-                                                                        <userDefinedRuntimeAttribute type="number" keyPath="fillMode">
-                                                                            <integer key="value" value="1"/>
-                                                                        </userDefinedRuntimeAttribute>
-                                                                        <userDefinedRuntimeAttribute type="color" keyPath="filledBorderColor">
-                                                                            <color key="value" red="0.97272387390000004" green="1" blue="0.1755811441" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                                                        </userDefinedRuntimeAttribute>
-                                                                        <userDefinedRuntimeAttribute type="color" keyPath="emptyColor">
-                                                                            <color key="value" red="0.79568086140000005" green="0.79568086140000005" blue="0.79568086140000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                                                        </userDefinedRuntimeAttribute>
-                                                                    </userDefinedRuntimeAttributes>
-                                                                </view>
+                                                                <stackView opaque="NO" contentMode="scaleToFill" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="tlF-gc-wea" customClass="StarRatingView" customModule="__BoxOffice" customModuleProvider="target">
+                                                                    <rect key="frame" x="3.5" y="49.5" width="94" height="18"/>
+                                                                </stackView>
                                                             </subviews>
                                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <constraints>
+                                                                <constraint firstAttribute="bottom" secondItem="tlF-gc-wea" secondAttribute="bottom" constant="4" id="1wq-pm-Lvo"/>
                                                                 <constraint firstItem="Jbm-Oz-BJ3" firstAttribute="top" secondItem="df8-dD-IlZ" secondAttribute="bottom" constant="5" id="2LE-c2-buG"/>
                                                                 <constraint firstItem="Jbm-Oz-BJ3" firstAttribute="centerX" secondItem="ULb-ek-fvO" secondAttribute="centerX" id="2go-Jb-pnp"/>
                                                                 <constraint firstAttribute="trailing" secondItem="2nU-2J-Pe4" secondAttribute="trailing" id="3ZQ-h7-H2K"/>
                                                                 <constraint firstAttribute="bottom" secondItem="8B3-Rb-wQg" secondAttribute="bottom" id="57S-PE-mKu"/>
+                                                                <constraint firstItem="tlF-gc-wea" firstAttribute="centerX" secondItem="ULb-ek-fvO" secondAttribute="centerX" id="CfV-o7-FZF"/>
                                                                 <constraint firstAttribute="bottom" secondItem="2nU-2J-Pe4" secondAttribute="bottom" id="Guw-qj-D3f"/>
-                                                                <constraint firstAttribute="bottom" secondItem="TZW-Xn-JLG" secondAttribute="bottom" constant="5" id="MR4-NJ-prG"/>
                                                                 <constraint firstItem="8B3-Rb-wQg" firstAttribute="leading" secondItem="ULb-ek-fvO" secondAttribute="leading" id="UkF-PO-qS9"/>
                                                                 <constraint firstItem="df8-dD-IlZ" firstAttribute="top" secondItem="ULb-ek-fvO" secondAttribute="top" constant="3" id="Z58-IY-I8L"/>
-                                                                <constraint firstItem="TZW-Xn-JLG" firstAttribute="centerX" secondItem="ULb-ek-fvO" secondAttribute="centerX" id="bAT-kc-pkd"/>
+                                                                <constraint firstItem="tlF-gc-wea" firstAttribute="top" secondItem="Jbm-Oz-BJ3" secondAttribute="bottom" constant="3" id="dZS-C5-ed0"/>
                                                                 <constraint firstItem="df8-dD-IlZ" firstAttribute="centerX" secondItem="ULb-ek-fvO" secondAttribute="centerX" id="f13-5l-eDf"/>
                                                                 <constraint firstItem="2nU-2J-Pe4" firstAttribute="top" secondItem="ULb-ek-fvO" secondAttribute="top" id="gww-kB-woY"/>
-                                                                <constraint firstItem="TZW-Xn-JLG" firstAttribute="top" secondItem="Jbm-Oz-BJ3" secondAttribute="bottom" constant="4" id="idx-lh-k3Y"/>
                                                                 <constraint firstItem="8B3-Rb-wQg" firstAttribute="top" secondItem="ULb-ek-fvO" secondAttribute="top" id="lhW-8H-oeU"/>
                                                             </constraints>
                                                         </view>
@@ -630,7 +606,6 @@
                                             <outlet property="movieReservationRate" destination="xaI-jD-fJk" id="ct0-oc-Ehe"/>
                                             <outlet property="movieTitle" destination="tdk-9k-5cc" id="GvU-rI-Qy6"/>
                                             <outlet property="movieUserRating" destination="Jbm-Oz-BJ3" id="m7u-jo-DBW"/>
-                                            <outlet property="movieUserRatingStar" destination="TZW-Xn-JLG" id="ljw-94-Ypv"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="content_cell" rowHeight="350" id="GcX-h0-6zQ" customClass="BoxOfficeContentTableViewCell" customModule="__BoxOffice" customModuleProvider="target">
@@ -857,7 +832,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="r5n-dr-Tg4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2668" y="933.28335832083962"/>
+            <point key="canvasLocation" x="2666.25" y="932.74647887323943"/>
         </scene>
         <!--Box Office Comment Modal View Controller-->
         <scene sceneID="avG-Av-Fm2">
@@ -1084,6 +1059,6 @@
         </namedColor>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="APH-a9-9jF"/>
+        <segue reference="fTD-rF-2Sd"/>
     </inferredMetricsTieBreakers>
 </document>
