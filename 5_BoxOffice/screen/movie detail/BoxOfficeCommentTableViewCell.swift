@@ -17,7 +17,7 @@ import Cosmos
 class BoxOfficeCommentTableViewCell: UITableViewCell {
     
     @IBOutlet weak var userId: UILabel!
-    @IBOutlet weak var userRatingStar: CosmosView!
+    @IBOutlet weak var userStarRatingView: StarRatingView!
     @IBOutlet weak var userCommentDate: UILabel!
     @IBOutlet weak var userComment: UILabel!
     
@@ -25,7 +25,9 @@ class BoxOfficeCommentTableViewCell: UITableViewCell {
         userId.text = comment.writer
         userCommentDate.text = comment.timestamp.convertDateFormatter()
         userComment.text = comment.contents
-        userRatingStar.rating = StarCount(rating: comment.rating).getStartCount()
-        userRatingStar.settings.updateOnTouch = false
+        userStarRatingView.rating = comment.rating
+        
+//        userRatingStar.rating = StarCount(rating: comment.rating).getStartCount()
+//        userRatingStar.settings.updateOnTouch = false
     }
 }

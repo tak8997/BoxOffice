@@ -20,7 +20,7 @@ class BoxOfficeDetailTableViewCell: UITableViewCell {
     @IBOutlet weak var movieReservationGrade: UILabel!
     @IBOutlet weak var movieReservationRate: UILabel!
     @IBOutlet weak var movieUserRating: UILabel!
-//    @IBOutlet weak var movieUserRatingStar: CosmosView!
+    @IBOutlet weak var movieUserRatingStar: StarRatingView!
     @IBOutlet weak var movieAudienceCount: UILabel!
     
     func configure(movieDetail: MovieDetail?, tapGestureRecognizer: UITapGestureRecognizer) {
@@ -40,11 +40,7 @@ class BoxOfficeDetailTableViewCell: UITableViewCell {
             self.movieUserRating.text = String(rating)
             self.movieAudienceCount.text = audience.convertNumberToDecimalFormatter()
             self.movieDate.text = "\(date)개봉"
-            
-            let startCount: Double = StarCount(rating: rating).getStartCount()
-            
-//            self.movieUserRatingStar.settings.updateOnTouch = false
-//            self.movieUserRatingStar.rating = startCount
+            self.movieUserRatingStar.rating = rating
         }
         
         self.movieGrade.image = UIImage(named: MovieGrade(rawValue: movieDetail?.grade ?? 12)?.movieGrade ?? "")
