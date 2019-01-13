@@ -8,6 +8,12 @@
 
 import UIKit
 
+@objc protocol StarRatingViewProtocol {
+    @objc optional func touchesUpStarRatingView(beginUpdating rating: Double)
+    @objc optional func touchesUpStarRatingView(updating rating: Double)
+    @objc optional func touchesUpStarRatingView(endUpdating rating: Double)
+}
+
 @IBDesignable class StarRatingView: UIStackView {
 
     // Mark: - Properties
@@ -58,8 +64,7 @@ import UIKit
             starImageView.translatesAutoresizingMaskIntoConstraints = false
             starImageView.heightAnchor.constraint(equalToConstant: starSize.width).isActive = true
             starImageView.widthAnchor.constraint(equalToConstant: starSize.height).isActive = true
-//            starImageView.addTarget(self, action: #selector(tappedStarRatingButton(button:)), for: .touchUpInside)
-            
+
             addArrangedSubview(starImageView)
             
             starRatingImageViews.append(starImageView)
@@ -89,21 +94,24 @@ import UIKit
             }
         }
     }
+
+}
+
+// Mark:- Touch Events
+extension StarRatingView {
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        
+    }
     
-//    // Mark: - Button Action
-//    @objc private func tappedStarRatingButton(button: UIButton) {
-//        guard let index = starRatingImageViews.index(of: button) else {
-//            fatalError("The button, \(button), is not in the starRatingButtons array: \(starRatingButtons)")
-//        }
-//
-//        let selectedRating = index + 1
-//
-//        if selectedRating == rating {
-//            rating = 0
-//        } else {
-//            rating = selectedRating
-//        }
-//
-//    }
+    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+        
+    }
     
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        
+    }
+    
+    override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
+        
+    }
 }
