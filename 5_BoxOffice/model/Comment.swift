@@ -16,14 +16,6 @@ import Foundation
 //    contents:"정말 다섯 번은 넘게 운듯 ᅲᅲᅲ 감동 쩔어요.꼭 보셈 두 번 보셈"
 //}
 
-//struct MovieCommentsApiResponse: Codable {
-//    let comments: [Comment]
-//
-//    enum CodingKeys: String, CodingKey {
-//        case comments
-//    }
-//}
-
 struct MovieCommentsApiResponse: Codable {
     
     typealias JSON = [String: AnyObject]
