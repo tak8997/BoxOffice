@@ -26,8 +26,5 @@ class BoxOfficeCommentTableViewCell: UITableViewCell {
         userCommentDate.text = comment.timestamp.convertDateFormatter()
         userComment.text = comment.contents
         userStarRatingView.rating = comment.rating
-        
-//        userRatingStar.rating = StarCount(rating: comment.rating).getStartCount()
-//        userRatingStar.settings.updateOnTouch = false
     }
 }
