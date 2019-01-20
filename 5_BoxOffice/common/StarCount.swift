@@ -12,9 +12,7 @@ struct StarCount {
     let rating: Double
     
     func getStartCount() -> Double {
-        let starCnt: Double = ceil(rating) * 0.5
-        
-        return starCnt
+        return ceil(rating) * 0.5
     }
 
 }
