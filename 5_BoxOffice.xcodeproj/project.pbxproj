@@ -15,7 +15,7 @@
 		C2108F1021C4F83A00FC4865 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2108F0F21C4F83A00FC4865 /* NetworkService.swift */; };
 		C2108F1221C614CB00FC4865 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2108F1121C614CB00FC4865 /* NetworkError.swift */; };
 		C2108F1421C61DED00FC4865 /* UIColor+Styleguide.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2108F1321C61DED00FC4865 /* UIColor+Styleguide.swift */; };
-		C2108F1A21C62C5B00FC4865 /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2108F1921C62C5B00FC4865 /* UIViewController.swift */; };
+		C2108F1A21C62C5B00FC4865 /* UIAlertController+OrderSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2108F1921C62C5B00FC4865 /* UIAlertController+OrderSettings.swift */; };
 		C2108F1C21C6475200FC4865 /* NetworkStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2108F1B21C6475200FC4865 /* NetworkStatus.swift */; };
 		C2108F1E21C6799900FC4865 /* StarCount.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2108F1D21C6799900FC4865 /* StarCount.swift */; };
 		C220BE242157E42900DF1170 /* BoxOfficeCommentModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C220BE232157E42900DF1170 /* BoxOfficeCommentModalViewController.swift */; };
@@ -54,7 +54,7 @@
 		C2108F0F21C4F83A00FC4865 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		C2108F1121C614CB00FC4865 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 		C2108F1321C61DED00FC4865 /* UIColor+Styleguide.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Styleguide.swift"; sourceTree = "<group>"; };
-		C2108F1921C62C5B00FC4865 /* UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
+		C2108F1921C62C5B00FC4865 /* UIAlertController+OrderSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIAlertController+OrderSettings.swift"; sourceTree = "<group>"; };
 		C2108F1B21C6475200FC4865 /* NetworkStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkStatus.swift; sourceTree = "<group>"; };
 		C2108F1D21C6799900FC4865 /* StarCount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarCount.swift; sourceTree = "<group>"; };
 		C220BE232157E42900DF1170 /* BoxOfficeCommentModalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxOfficeCommentModalViewController.swift; sourceTree = "<group>"; };
@@ -243,8 +243,8 @@
 			children = (
 				C2925A112140110000A61282 /* Primitive.swift */,
 				C2108F1321C61DED00FC4865 /* UIColor+Styleguide.swift */,
-				C2108F1921C62C5B00FC4865 /* UIViewController.swift */,
 				3BABC2B821D7C993007865B8 /* UIApplication.swift */,
+				C2108F1921C62C5B00FC4865 /* UIAlertController+OrderSettings.swift */,
 			);
 			path = extension;
 			sourceTree = "<group>";
@@ -394,7 +394,7 @@
 				C2241700215DDA3A0060F95A /* BoxOfficeMovieImageModalViewController.swift in Sources */,
 				C22F4706214E5B4300F91E02 /* BoxOfficeDetailTableViewCell.swift in Sources */,
 				C22F470A214FE87400F91E02 /* BoxOfficeInfoTableViewCell.swift in Sources */,
-				C2108F1A21C62C5B00FC4865 /* UIViewController.swift in Sources */,
+				C2108F1A21C62C5B00FC4865 /* UIAlertController+OrderSettings.swift in Sources */,
 				C2108F1021C4F83A00FC4865 /* NetworkService.swift in Sources */,
 				C29259FF213FEDAB00A61282 /* AppDelegate.swift in Sources */,
 				C220BE242157E42900DF1170 /* BoxOfficeCommentModalViewController.swift in Sources */,

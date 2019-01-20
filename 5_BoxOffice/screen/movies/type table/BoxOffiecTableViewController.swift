@@ -85,7 +85,7 @@ class BoxOfficeTableViewController: BaseViewController {
     }
     
     private func fetchMovies() {
-        BoxOfficeService.fetchMovies(orderType: self.orderType.rawValue) { (movies) in
+        BoxOfficeService.shared.fetchMovies(orderType: self.orderType.rawValue) { (movies) in
             self.movies = movies
             
             self.tableView.reloadData()
@@ -100,9 +100,9 @@ class BoxOfficeTableViewController: BaseViewController {
     }
     
     @IBAction func tappedSetting(_ sender: UIBarButtonItem) {
-        showOrderSettingActionSheet { orderType in
+        self.showOrderSettingActionSheet(completion: { (orderType) in
             self.fetchMoviesSettingViewController(orderType: orderType)
-        }
+        })
     }
 }
 
