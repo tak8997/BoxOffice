@@ -51,7 +51,11 @@ class BoxOfficeDetailViewController: BaseViewController {
         if let movieId = movieId {
             showIndicator()
 
-            BoxOfficeService.shared.fetchMovieDetail(movieId: movieId) { movie in
+            BoxOfficeService.shared.fetchMovieDetail(movieId: movieId) { [weak self] movie in
+                guard let self = self else {
+                    return
+                }
+                
                 self.movieDetail = movie
                 
                 self.tableView.reloadSections(IndexSet(self.detailSection...self.infoSection), with: .automatic)
@@ -63,7 +67,11 @@ class BoxOfficeDetailViewController: BaseViewController {
         if let movieId = movieId {
             showIndicator()
 
-            BoxOfficeService.shared.fetchMovieComment(movieId: movieId) { comments in
+            BoxOfficeService.shared.fetchMovieComment(movieId: movieId) { [weak self] comments in
+                guard let self = self else {
+                    return
+                }
+                
                 let comments = comments
 
                 self.comments.removeAll()

@@ -90,7 +90,11 @@ class BoxOfficeCommentModalViewController: BaseViewController {
     private func registerMovieComment(id: String?, nickname: String, comment: String, rating: Double) {
         showIndicator()
         
-        BoxOfficeService.registerMovieComment(id: id, nickname: nickname, comment: comment, rating: rating) { response in
+        BoxOfficeService.shared.registerMovieComment(id: id, nickname: nickname, comment: comment, rating: rating) { [weak self] response in
+            guard let self = self else {
+                return
+            }
+            
             self.hideIndicator()
             self.delegate?.sendStatus(status: response)
 
