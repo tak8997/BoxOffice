@@ -13,6 +13,8 @@ class BoxOfficeService {
     
     static let shared = BoxOfficeService()
     
+    private init() { }
+    
     private let baseUrl = "http://connect-boxoffice.run.goorm.io/"
     
     private var cachedMovies: [String : [Movie]] = [:]

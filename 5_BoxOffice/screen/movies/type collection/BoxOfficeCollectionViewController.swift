@@ -99,7 +99,11 @@ class BoxOfficeCollectionViewController: BaseViewController {
     }
     
     private func fetchMovies() {
-        BoxOfficeService.shared.fetchMovies(orderType: self.orderType.rawValue) { (movies) in
+        BoxOfficeService.shared.fetchMovies(orderType: self.orderType.rawValue) { [weak self] (movies) in
+            guard let self = self else {
+                return
+            }
+            
             self.movies = movies
             
             self.collectionView.reloadData()
