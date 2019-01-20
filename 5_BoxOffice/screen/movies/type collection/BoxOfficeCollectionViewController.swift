@@ -99,7 +99,7 @@ class BoxOfficeCollectionViewController: BaseViewController {
     }
     
     private func fetchMovies() {
-        BoxOfficeService.fetchMovies(orderType: self.orderType.rawValue) { (movies) in
+        BoxOfficeService.shared.fetchMovies(orderType: self.orderType.rawValue) { (movies) in
             self.movies = movies
             
             self.collectionView.reloadData()
@@ -112,9 +112,12 @@ class BoxOfficeCollectionViewController: BaseViewController {
     @objc func handleRefresh(_ refreshControl: UIRefreshControl) {
         self.fetchMovies()
     }
-    
+
+}
+
+extension BoxOfficeCollectionViewController {
     @IBAction func tappedSettings(_ sender: UIBarButtonItem) {
-        showOrderSettingActionSheet { orderType in
+        showOrderSettingActionSheet { (orderType) in
             self.fetchMoviesSettingViewController(orderType: orderType)
         }
     }

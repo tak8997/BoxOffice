@@ -35,7 +35,7 @@ class BoxOfficeMovieImageModalViewController: BaseViewController {
         
         showIndicator()
         
-        BoxOfficeService.fetchImage(imageURL: movieImage) { (image) in
+        BoxOfficeService.shared.fetchImage(imageURL: movieImage) { (image) in
             self.moviePoster.image = image
             
             self.hideIndicator()

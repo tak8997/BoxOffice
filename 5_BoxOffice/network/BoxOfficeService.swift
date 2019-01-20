@@ -11,15 +11,17 @@ import UIKit
 
 class BoxOfficeService {
     
-    private static let baseUrl = "http://connect-boxoffice.run.goorm.io/"
+    static let shared = BoxOfficeService()
     
-    private static var cachedMovies: [String : [Movie]] = [:]
-    private static var cachedMovie: [String : MovieDetail] = [:]
-    private static var cachedComments: [String: [Comment]] = [:]
+    private let baseUrl = "http://connect-boxoffice.run.goorm.io/"
     
-    private static var imageURL: URL?
+    private var cachedMovies: [String : [Movie]] = [:]
+    private var cachedMovie: [String : MovieDetail] = [:]
+    private var cachedComments: [String: [Comment]] = [:]
     
-    private static var diskPath: String {
+    private var imageURL: URL?
+    
+    private var diskPath: String {
         let diskPaths = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.cachesDirectory, FileManager.SearchPathDomainMask.userDomainMask, true)
         let cacheDirectory = diskPaths[0] as NSString
         let rtnPath = cacheDirectory.appendingPathComponent("\(String(describing: self.imageURL?.absoluteString.hashValue))")
@@ -27,7 +29,7 @@ class BoxOfficeService {
         return rtnPath
     }
 
-    static func fetchMovies(orderType: String, completion: @escaping ([Movie]) -> ()) {
+    func fetchMovies(orderType: String, completion: @escaping ([Movie]) -> ()) {
         guard let url: URL = URL(string: baseUrl + "movies?order_type=" + orderType) else {
             return
         }
@@ -52,7 +54,7 @@ class BoxOfficeService {
         }
     }
     
-    static func fetchMovieDetail(movieId: String, completion: @escaping (MovieDetail) -> ()) {
+    func fetchMovieDetail(movieId: String, completion: @escaping (MovieDetail) -> ()) {
         guard let url: URL = URL(string: baseUrl + "movie?id=" + movieId) else {
             return
         }
@@ -77,7 +79,7 @@ class BoxOfficeService {
         }
     }
     
-    static func fetchMovieComment(movieId: String, completion: @escaping ([Comment]) -> ()) {
+    func fetchMovieComment(movieId: String, completion: @escaping ([Comment]) -> ()) {
         guard let url: URL = URL(string: baseUrl + "comments?movie_id=" + movieId) else {
             return
         }
@@ -102,7 +104,7 @@ class BoxOfficeService {
         }
     }
     
-    static func fetchImage(imageURL: String, completion: @escaping (UIImage) -> ()) {
+    func fetchImage(imageURL: String, completion: @escaping (UIImage) -> ()) {
         guard let imageURL = URL(string: imageURL) else {
             return
         }
@@ -133,7 +135,7 @@ class BoxOfficeService {
         }
     }
     
-    static func registerMovieComment(id: String?, nickname: String, comment: String, rating: Double, completion: @escaping(NetworkStatus) -> ()) {
+    func registerMovieComment(id: String?, nickname: String, comment: String, rating: Double, completion: @escaping(NetworkStatus) -> ()) {
         guard
             let url: URL = URL(string: baseUrl + "comment"),
             let id: String = id else {

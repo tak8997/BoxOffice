@@ -38,7 +38,7 @@ class BoxOfficeCollectionViewCell: UICollectionViewCell {
         self.movieGrade.image = UIImage(named: MovieGrade(rawValue: movie.grade)?.movieGrade ?? "")
         self.movieThumb.image = UIImage(named: "img_placeholder")
         
-        BoxOfficeService.fetchImage(imageURL: movie.thumb) { (image) in
+        BoxOfficeService.shared.fetchImage(imageURL: movie.thumb) { (image) in
             if item == index.item {
                 self.movieThumb.image = image
             }
