@@ -71,7 +71,7 @@ class BoxOfficeCommentModalViewController: UIViewController {
             guard let self = self else {
                 return
             }
-            
+        
             self.delegate?.sendStatus(status: response)
             self.dismiss(animated: true, completion: nil)
         }
