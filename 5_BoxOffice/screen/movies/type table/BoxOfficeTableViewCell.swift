@@ -29,6 +29,7 @@ class BoxOfficeTableViewCell: UITableViewCell {
     
         BoxOfficeService.shared.fetchImage(imageURL: movie.thumb) { (image) in
             if row == index.row {
+                print("zzcc")
                 self.movieThumb.image = image
             }
         }

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3B35DD5E22267DF900775F57 /* UIViewController+ErrorAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B35DD5D22267DF900775F57 /* UIViewController+ErrorAlert.swift */; };
 		3BABC2B721D7AC84007865B8 /* MovieGrade.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BABC2B621D7AC84007865B8 /* MovieGrade.swift */; };
 		3BABC2B921D7C993007865B8 /* UIApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BABC2B821D7C993007865B8 /* UIApplication.swift */; };
 		7D3F600DF83539A25E8DE8F8 /* Pods_5_BoxOffice.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AEA268B3C3D39058ADD0CD6C /* Pods_5_BoxOffice.framework */; };
@@ -30,7 +31,6 @@
 		C22F4708214FE86300F91E02 /* BoxOfficeContentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C22F4707214FE86300F91E02 /* BoxOfficeContentTableViewCell.swift */; };
 		C22F470A214FE87400F91E02 /* BoxOfficeInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C22F4709214FE87400F91E02 /* BoxOfficeInfoTableViewCell.swift */; };
 		C22F470E214FEA2800F91E02 /* BoxOfficeCommentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C22F470D214FEA2800F91E02 /* BoxOfficeCommentTableViewCell.swift */; };
-		C23375C0215A07E200CDA33D /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C23375BF215A07E200CDA33D /* BaseViewController.swift */; };
 		C253D44E21E871B7008C18CA /* StarRatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C253D44D21E871B7008C18CA /* StarRatingView.swift */; };
 		C26962D721554C4000A3EEC3 /* MovieDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = C26962D621554C4000A3EEC3 /* MovieDetail.swift */; };
 		C29259FF213FEDAB00A61282 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C29259FE213FEDAB00A61282 /* AppDelegate.swift */; };
@@ -44,6 +44,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3B35DD5D22267DF900775F57 /* UIViewController+ErrorAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+ErrorAlert.swift"; sourceTree = "<group>"; };
 		3BABC2B621D7AC84007865B8 /* MovieGrade.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieGrade.swift; sourceTree = "<group>"; };
 		3BABC2B821D7C993007865B8 /* UIApplication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIApplication.swift; sourceTree = "<group>"; };
 		4F30813297B9E2C6C354C911 /* Pods-5_BoxOffice.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-5_BoxOffice.release.xcconfig"; path = "Pods/Target Support Files/Pods-5_BoxOffice/Pods-5_BoxOffice.release.xcconfig"; sourceTree = "<group>"; };
@@ -69,7 +70,6 @@
 		C22F4707214FE86300F91E02 /* BoxOfficeContentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxOfficeContentTableViewCell.swift; sourceTree = "<group>"; };
 		C22F4709214FE87400F91E02 /* BoxOfficeInfoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxOfficeInfoTableViewCell.swift; sourceTree = "<group>"; };
 		C22F470D214FEA2800F91E02 /* BoxOfficeCommentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxOfficeCommentTableViewCell.swift; sourceTree = "<group>"; };
-		C23375BF215A07E200CDA33D /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		C253D44D21E871B7008C18CA /* StarRatingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarRatingView.swift; sourceTree = "<group>"; };
 		C26962D621554C4000A3EEC3 /* MovieDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetail.swift; sourceTree = "<group>"; };
 		C29259FB213FEDAB00A61282 /* 5_BoxOffice.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = 5_BoxOffice.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -196,7 +196,6 @@
 		C26962D32155481300A3EEC3 /* common */ = {
 			isa = PBXGroup;
 			children = (
-				C23375BF215A07E200CDA33D /* BaseViewController.swift */,
 				C2925A02213FEDAB00A61282 /* Main.storyboard */,
 				C22F46FF21498F2100F91E02 /* OrderType.swift */,
 				C2108F1D21C6799900FC4865 /* StarCount.swift */,
@@ -245,6 +244,7 @@
 				C2108F1321C61DED00FC4865 /* UIColor+Styleguide.swift */,
 				3BABC2B821D7C993007865B8 /* UIApplication.swift */,
 				C2108F1921C62C5B00FC4865 /* UIAlertController+OrderSettings.swift */,
+				3B35DD5D22267DF900775F57 /* UIViewController+ErrorAlert.swift */,
 			);
 			path = extension;
 			sourceTree = "<group>";
@@ -384,7 +384,6 @@
 				C22F470021498F2100F91E02 /* OrderType.swift in Sources */,
 				C22F46FE214934AD00F91E02 /* BoxOfficeCollectionViewCell.swift in Sources */,
 				C2108F0E21C4F51C00FC4865 /* BoxOfficeService.swift in Sources */,
-				C23375C0215A07E200CDA33D /* BaseViewController.swift in Sources */,
 				C2108F1E21C6799900FC4865 /* StarCount.swift in Sources */,
 				C2925A01213FEDAB00A61282 /* BoxOffiecTableViewController.swift in Sources */,
 				C26962D721554C4000A3EEC3 /* MovieDetail.swift in Sources */,
@@ -407,6 +406,7 @@
 				3BABC2B721D7AC84007865B8 /* MovieGrade.swift in Sources */,
 				C2B711742144EEC700C99328 /* Movie.swift in Sources */,
 				C2108F1421C61DED00FC4865 /* UIColor+Styleguide.swift in Sources */,
+				3B35DD5E22267DF900775F57 /* UIViewController+ErrorAlert.swift in Sources */,
 				C22F4702214BC0F200F91E02 /* BoxOfficeDetailViewController.swift in Sources */,
 				C29534C621CE6D68009FF64E /* ImageCache.swift in Sources */,
 				C22F4708214FE86300F91E02 /* BoxOfficeContentTableViewCell.swift in Sources */,

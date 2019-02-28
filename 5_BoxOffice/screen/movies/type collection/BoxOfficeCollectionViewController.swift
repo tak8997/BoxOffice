@@ -8,7 +8,7 @@
 
 import UIKit
 
-class BoxOfficeCollectionViewController: BaseViewController {
+class BoxOfficeCollectionViewController: UIViewController {
 
     @IBOutlet weak var collectionView: UICollectionView!
     
@@ -37,12 +37,6 @@ class BoxOfficeCollectionViewController: BaseViewController {
         fetchMoviesSettingViewController(orderType: orderType)
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        
-        hideIndicator()
-    }
-    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard
             let boxOfficeDetailViewController = segue.destination as? BoxOfficeDetailViewController,
@@ -66,10 +60,7 @@ class BoxOfficeCollectionViewController: BaseViewController {
     private func intializeViews() {
         initializeNavigationBar()
         initializeFlowLayout()
-        
-        self.indicator.isHidden = true
     }
-    
     
     private func initializeFlowLayout() {
         let flowLayout = UICollectionViewFlowLayout()
@@ -92,7 +83,6 @@ class BoxOfficeCollectionViewController: BaseViewController {
     // Mark: - load data
     private func fetchMoviesSettingViewController(orderType: OrderType) {
         self.orderType = orderType
-        self.showIndicator()
         self.fetchMovies()
         
         self.navigationController?.navigationBar.topItem?.title = orderType.navigationTitle
@@ -108,8 +98,6 @@ class BoxOfficeCollectionViewController: BaseViewController {
             
             self.collectionView.reloadData()
             self.refreshControl.endRefreshing()
-            
-            self.hideIndicator()
         }
     }
     

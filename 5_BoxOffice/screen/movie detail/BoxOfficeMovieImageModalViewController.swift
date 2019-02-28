@@ -8,7 +8,7 @@
 
 import UIKit
 
-class BoxOfficeMovieImageModalViewController: BaseViewController {
+class BoxOfficeMovieImageModalViewController: UIViewController {
 
     @IBOutlet weak var moviePoster: UIImageView!
     
@@ -22,30 +22,18 @@ class BoxOfficeMovieImageModalViewController: BaseViewController {
         fetchMovieImage()
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        
-        hideIndicator()
-    }
-    
     private func fetchMovieImage() {
         guard let movieImage = self.movieImage else {
             return
         }
         
-        showIndicator()
-        
         BoxOfficeService.shared.fetchImage(imageURL: movieImage) { (image) in
             self.moviePoster.image = image
-            
-            self.hideIndicator()
         }
     }
     
     private func intializeViews() {
         intializeNavigationBar()
-        
-        indicator.isHidden = true
         
         moviePoster.image =  UIImage(named: "img_placeholder")
     }

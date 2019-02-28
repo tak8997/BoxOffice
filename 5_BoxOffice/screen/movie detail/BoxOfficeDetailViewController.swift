@@ -9,7 +9,7 @@
 import UIKit
 import Cosmos
 
-class BoxOfficeDetailViewController: BaseViewController {
+class BoxOfficeDetailViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
     
@@ -31,26 +31,16 @@ class BoxOfficeDetailViewController: BaseViewController {
         fetchMovie()
         fetchComment()
     }
-
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        
-        hideIndicator()
-    }
     
     private func intializeViews() {
         navigationController?.navigationBar.topItem?.title = "영화목록"
         navigationController?.navigationBar.tintColor = UIColor.white
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor : UIColor.white]
-        
-        indicator.isHidden = true
     }
     
     // Mark: - load data
     private func fetchMovie() {
         if let movieId = movieId {
-            showIndicator()
-
             BoxOfficeService.shared.fetchMovieDetail(movieId: movieId) { [weak self] movie in
                 guard let self = self else {
                     return
@@ -65,8 +55,6 @@ class BoxOfficeDetailViewController: BaseViewController {
 
     private func fetchComment() {
         if let movieId = movieId {
-            showIndicator()
-
             BoxOfficeService.shared.fetchMovieComment(movieId: movieId) { [weak self] comments in
                 guard let self = self else {
                     return
@@ -78,8 +66,6 @@ class BoxOfficeDetailViewController: BaseViewController {
                 self.comments.append(contentsOf: comments)
                 
                 self.tableView.reloadSections(IndexSet(self.commentSection...self.commentSection), with: .automatic)
-                
-                self.hideIndicator()
             }
         }
     }

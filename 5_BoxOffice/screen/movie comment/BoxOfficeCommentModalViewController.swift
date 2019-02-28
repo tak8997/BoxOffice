@@ -13,7 +13,7 @@ protocol ModalViewControllerDelegate {
     func sendStatus(status: NetworkStatus)
 }
 
-class BoxOfficeCommentModalViewController: BaseViewController {
+class BoxOfficeCommentModalViewController: UIViewController {
     
     @IBOutlet weak var movieTitleLabel: UILabel!
     @IBOutlet weak var movieGradeImage: UIImageView!
@@ -25,6 +25,8 @@ class BoxOfficeCommentModalViewController: BaseViewController {
     var movieDetail: MovieDetail?
     var delegate: ModalViewControllerDelegate?
     
+    private let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorView.Style.gray)
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     
@@ -33,29 +35,6 @@ class BoxOfficeCommentModalViewController: BaseViewController {
         fetchSavedNickname()
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        
-        hideIndicator()
-    }
-
-    private func showAlertController() {
-        let style = UIAlertControllerStyle.alert
-        
-        let alertController: UIAlertController = UIAlertController(title: "등록 실패", message: "항목을 모두 채워주세요.", preferredStyle: style)
-        
-        let okAction: UIAlertAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: { (action: UIAlertAction) in
-            print("OK preseed \(action.title ?? "")")
-        })
-        
-        let cancelAction: UIAlertAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.cancel, handler: nil)
-        
-        alertController.addAction(okAction)
-        alertController.addAction(cancelAction)
-        
-        self.present(alertController, animated: true, completion: nil)
-    }
-
     private func saveNickName(nickname: String) {
         let preferences = UserDefaults.standard
         
@@ -88,16 +67,12 @@ class BoxOfficeCommentModalViewController: BaseViewController {
     }
     
     private func registerMovieComment(id: String?, nickname: String, comment: String, rating: Double) {
-        showIndicator()
-        
         BoxOfficeService.shared.registerMovieComment(id: id, nickname: nickname, comment: comment, rating: rating) { [weak self] response in
             guard let self = self else {
                 return
             }
             
-            self.hideIndicator()
             self.delegate?.sendStatus(status: response)
-
             self.dismiss(animated: true, completion: nil)
         }
     }
@@ -105,8 +80,6 @@ class BoxOfficeCommentModalViewController: BaseViewController {
     private func initializeViews() {
         intializeNavigationBar()
         intializeRatingStarView()
-        
-        indicator.isHidden = true
         
         movieTitleLabel.text = movieDetail?.title
         
@@ -175,7 +148,7 @@ class BoxOfficeCommentModalViewController: BaseViewController {
         if !nickname.isEmpty && !comment.isEmpty && userRatingStarView.rating != 0.0 {
             registerMovieComment(id: movieDetail?.id, nickname: nickname, comment: comment, rating: userRatingStarView.rating)
         } else {
-            showAlertController()
+            showAlertController(title: "등록 실패", message: "항목을 모두 채워주세요.")
         }
         
         saveNickName(nickname: nickname)

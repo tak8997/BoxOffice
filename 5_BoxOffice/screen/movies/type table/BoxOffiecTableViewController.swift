@@ -8,7 +8,7 @@
 
 import UIKit
 
-class BoxOfficeTableViewController: BaseViewController {
+class BoxOfficeTableViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -38,12 +38,6 @@ class BoxOfficeTableViewController: BaseViewController {
         fetchMoviesSettingViewController(orderType: orderType)
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        
-        hideIndicator()
-    }
-    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard
             let boxOfficeDetailViewController = segue.destination as? BoxOfficeDetailViewController,
@@ -64,8 +58,6 @@ class BoxOfficeTableViewController: BaseViewController {
 
     private func intializeViews() {
         intializeNavigationBar()
-        
-        self.indicator.isHidden = true
     }
     
     private func intializeNavigationBar() {
@@ -78,7 +70,6 @@ class BoxOfficeTableViewController: BaseViewController {
     // Mark: - load data
     private func fetchMoviesSettingViewController(orderType: OrderType) {
         self.orderType = orderType
-        self.showIndicator()
         self.fetchMovies()
         
         self.navigationController?.navigationBar.topItem?.title = orderType.navigationTitle
@@ -94,8 +85,6 @@ class BoxOfficeTableViewController: BaseViewController {
             
             self.tableView.reloadData()
             self.refreshControl.endRefreshing()
-            
-            self.hideIndicator()
         }
     }
     
@@ -122,7 +111,6 @@ extension BoxOfficeTableViewController: UITableViewDelegate, UITableViewDataSour
         }
      
         let movie: Movie = movies[indexPath.row]
-        
         cell.configure(movie, row: indexPath.row, index: self.tableView.indexPath(for: cell) ?? indexPath)
         
         return cell
