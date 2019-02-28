@@ -42,7 +42,9 @@ class BoxOfficeService {
             return
         }
         
-        NetworkService.shared.fetchData(url: url) { (json) in
+        NetworkService.shared.fetchData(url: url) { [weak self] (json) in
+            guard let self = self { return }
+            
             do {
                 let response = try MoviesApiResponse(json: json)
                 
@@ -67,7 +69,9 @@ class BoxOfficeService {
             return
         }
         
-        NetworkService.shared.fetchData(url: url) { (json) in
+        NetworkService.shared.fetchData(url: url) { [weak self] (json) in
+            guard let self = self { return }
+            
             do {
                 let response = try MovieDetailApiResponse(json: json)
                 
@@ -92,7 +96,9 @@ class BoxOfficeService {
             return
         }
         
-        NetworkService.shared.fetchData(url: url) { (json) in
+        NetworkService.shared.fetchData(url: url) { [weak self] (json) in
+            guard let self = self { return }
+            
             do {
                 let response = try MovieCommentsApiResponse(json: json)
                 
@@ -126,7 +132,9 @@ class BoxOfficeService {
             }
         }
         
-        NetworkService.shared.fetchImage(imageURL: imageURL) { (image, dataCount) in
+        NetworkService.shared.fetchImage(imageURL: imageURL) { [weak self] (image, dataCount) in
+            guard let self = self { return }
+            
             ImageCache.shared.setObject(
                 image,
                 forKey: imageURL.absoluteString as NSString,
@@ -158,7 +166,8 @@ class BoxOfficeService {
         
         request.httpBody = httpBody
         
-        NetworkService.shared.postData(request: request) { (json) in
+        NetworkService.shared.postData(request: request) { [weak self] (json) in
+            guard let self = self { return }
             completion(NetworkStatus.success)
         }
     }
