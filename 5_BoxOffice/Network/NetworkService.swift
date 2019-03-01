@@ -24,11 +24,12 @@ class NetworkService {
             window.addSubview(activityIndicator)
         }
     }
-
-    public func fetchData(url: URL, completion: @escaping (Any) -> ()) {
+    
+    public func fetchData(url: URL, completion: @escaping (Any) -> (), errorHandler: @escaping () -> Void) {
         activityIndicator.startAnimating()
-        session.dataTask(with: url) {[weak self] (data, response, error) in
-            guard let data = data, self = self else {
+        session.dataTask(with: url) { [weak self] (data, response, error) in
+            guard let data = data, let self = self else {
+                errorHandler()
                 return
             }
             
@@ -39,8 +40,7 @@ class NetworkService {
                     completion(json)
                 }
             } catch {
-                NotificationCenter.default.post(name: networkErrorNotificationName, object: nil)
-                print(error)
+                errorHandler()
             }
             
             DispatchQueue.main.async {
@@ -63,12 +63,10 @@ class NetworkService {
         }.resume()
     }
     
-    public func postData(request: URLRequest, completion: @escaping (Any) -> ()) {
+    public func postData(request: URLRequest, completion: @escaping (Any) -> (), errorHandler: @escaping () -> Void) {
         activityIndicator.startAnimating()
         session.dataTask(with: request) { [weak self] (data, response, error) in
-            guard let data = data, self = self else {
-                return
-            }
+            guard let data = data, let self = self else { return }
             
             do {
                 let json = try JSONSerialization.jsonObject(with: data, options: [])

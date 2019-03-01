@@ -67,14 +67,12 @@ class BoxOfficeCommentModalViewController: UIViewController {
     }
     
     private func registerMovieComment(id: String?, nickname: String, comment: String, rating: Double) {
-        BoxOfficeService.shared.registerMovieComment(id: id, nickname: nickname, comment: comment, rating: rating) { [weak self] response in
-            guard let self = self else {
-                return
-            }
-        
+        BoxOfficeService.shared.registerMovieComment(id: id, nickname: nickname, comment: comment, rating: rating, completion: { [weak self] (response) in
+            guard let self = self else { return }
+            
             self.delegate?.sendStatus(status: response)
             self.dismiss(animated: true, completion: nil)
-        }
+        }) { self.showAlertController(title: "요청 실패", message: "알 수 없는 네트워크 에러 입니다.") }
     }
 
     private func initializeViews() {
