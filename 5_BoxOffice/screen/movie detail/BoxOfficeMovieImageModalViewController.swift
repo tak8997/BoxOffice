@@ -23,12 +23,13 @@ class BoxOfficeMovieImageModalViewController: UIViewController {
     }
     
     private func fetchMovieImage() {
-        guard let movieImage = self.movieImage else { return }
+        guard let movieImage = self.movieImage else {
+            return
+        }
         
-        BoxOfficeService.shared.fetchImage(imageURL: movieImage, completion: { [weak self] (image) in
-            guard let self = self else { return }
+        BoxOfficeService.shared.fetchImage(imageURL: movieImage) { (image) in
             self.moviePoster.image = image
-        }) 
+        }
     }
     
     private func intializeViews() {

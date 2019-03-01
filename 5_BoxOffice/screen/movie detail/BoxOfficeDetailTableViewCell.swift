@@ -47,9 +47,7 @@ class BoxOfficeDetailTableViewCell: UITableViewCell {
         self.movieImage.image = UIImage(named: "img_placeholder")
         self.movieImage.isUserInteractionEnabled = true
   
-        BoxOfficeService.shared.fetchImage(imageURL: movieDetail?.image ?? "") { [weak self] (image) in
-            guard let self = self else { return }
-            
+        BoxOfficeService.shared.fetchImage(imageURL: movieDetail?.image ?? "") { (image) in
             self.movieImage.image = image
             self.movieImage.addGestureRecognizer(tapGestureRecognizer)
         }

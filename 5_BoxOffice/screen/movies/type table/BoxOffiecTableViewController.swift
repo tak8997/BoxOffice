@@ -76,13 +76,16 @@ class BoxOfficeTableViewController: UIViewController {
     }
     
     private func fetchMovies() {
-        BoxOfficeService.shared.fetchMovies(orderType: orderType.rawValue, completion: { [weak self] (movies) in
-            guard let self = self else { return }
+        BoxOfficeService.shared.fetchMovies(orderType: self.orderType.rawValue) { [weak self] (movies) in
+            guard let self = self else {
+                return
+            }
             
             self.movies = movies
+            
             self.tableView.reloadData()
             self.refreshControl.endRefreshing()
-        }) { self.showAlertController(title: "요청 실패", message: "알 수 없는 네트워크 에러 입니다.") }
+        }
     }
     
     @objc func handleRefresh(_ refreshControl: UIRefreshControl) {
@@ -90,8 +93,7 @@ class BoxOfficeTableViewController: UIViewController {
     }
     
     @IBAction func tappedSetting(_ sender: UIBarButtonItem) {
-        self.showOrderSettingActionSheet(completion: { [weak self] (orderType) in
-            guard let self = self else { return }
+        self.showOrderSettingActionSheet(completion: { (orderType) in
             self.fetchMoviesSettingViewController(orderType: orderType)
         })
     }
