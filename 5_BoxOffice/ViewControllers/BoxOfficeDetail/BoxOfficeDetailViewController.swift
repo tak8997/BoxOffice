@@ -40,34 +40,28 @@ class BoxOfficeDetailViewController: UIViewController {
     
     // Mark: - load data
     private func fetchMovie() {
-        if let movieId = movieId {
-            BoxOfficeService.shared.fetchMovieDetail(movieId: movieId) { [weak self] movie in
-                guard let self = self else {
-                    return
-                }
-                
-                self.movieDetail = movie
-                
-                self.tableView.reloadSections(IndexSet(self.detailSection...self.infoSection), with: .automatic)
-            }
-        }
+        guard let movieId = movieId else { return }
+        
+        BoxOfficeService.shared.fetchMovieDetail(movieId: movieId, completion: { [weak self] (movie) in
+            guard let self = self else { return }
+            
+            self.movieDetail = movie
+            self.tableView.reloadSections(IndexSet(self.detailSection...self.infoSection), with: .automatic)
+        }) { self.showAlertController(title: "요청 실패", message: "알 수 없는 네트워크 에러 입니다.") }
     }
 
     private func fetchComment() {
-        if let movieId = movieId {
-            BoxOfficeService.shared.fetchMovieComment(movieId: movieId) { [weak self] comments in
-                guard let self = self else {
-                    return
-                }
-                
-                let comments = comments
-
-                self.comments.removeAll()
-                self.comments.append(contentsOf: comments)
-                
-                self.tableView.reloadSections(IndexSet(self.commentSection...self.commentSection), with: .automatic)
-            }
-        }
+        guard let movieId = movieId else { return }
+        
+        BoxOfficeService.shared.fetchMovieComment(movieId: movieId, completion: { [weak self] (comments) in
+            guard let self = self else { return }
+            
+            let comments = comments
+            
+            self.comments.removeAll()
+            self.comments.append(contentsOf: comments)
+            self.tableView.reloadSections(IndexSet(self.commentSection...self.commentSection), with: .automatic)
+        }) { self.showAlertController(title: "요청 실패", message: "알 수 없는 네트워크 에러 입니다.") }
     }
     
     @objc func tappedPostContent(gesture: UITapGestureRecognizer) {

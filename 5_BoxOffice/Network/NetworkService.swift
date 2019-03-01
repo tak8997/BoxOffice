@@ -24,11 +24,12 @@ class NetworkService {
             window.addSubview(activityIndicator)
         }
     }
-
-    public func fetchData(url: URL, completion: @escaping (Any) -> ()) {
+    
+    public func fetchData(url: URL, completion: @escaping (Any) -> (), errorHandler: @escaping () -> Void) {
         activityIndicator.startAnimating()
-        session.dataTask(with: url) { (data, response, error) in
-            guard let data = data else {
+        session.dataTask(with: url) { [weak self] (data, response, error) in
+            guard let data = data, let self = self else {
+                errorHandler()
                 return
             }
             
@@ -39,8 +40,7 @@ class NetworkService {
                     completion(json)
                 }
             } catch {
-                NotificationCenter.default.post(name: networkErrorNotificationName, object: nil)
-                print(error)
+                errorHandler()
             }
             
             DispatchQueue.main.async {
@@ -51,13 +51,10 @@ class NetworkService {
     
     public func fetchImage(imageURL: URL, completion: @escaping (UIImage, Int) -> ()) {
         activityIndicator.startAnimating()
-        session.dataTask(with: imageURL) { (data, response, error) in
-            guard
-                let data = data,
-                let image = UIImage(data: data) else {
-                    
-                return
-            }
+        session.dataTask(with: imageURL) { [weak self] (data, response, error) in
+            guard let data = data,
+                let image = UIImage(data: data),
+                let self = self else { return }
             
             DispatchQueue.main.async {
                 completion(image, data.count)
@@ -66,12 +63,10 @@ class NetworkService {
         }.resume()
     }
     
-    public func postData(request: URLRequest, completion: @escaping (Any) -> ()) {
+    public func postData(request: URLRequest, completion: @escaping (Any) -> (), errorHandler: @escaping () -> Void) {
         activityIndicator.startAnimating()
-        session.dataTask(with: request) { (data, response, error) in
-            guard let data = data else {
-                return
-            }
+        session.dataTask(with: request) { [weak self] (data, response, error) in
+            guard let data = data, let self = self else { return }
             
             do {
                 let json = try JSONSerialization.jsonObject(with: data, options: [])

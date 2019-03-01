@@ -31,8 +31,9 @@ class BoxOfficeService {
         return rtnPath
     }
 
-    func fetchMovies(orderType: String, completion: @escaping ([Movie]) -> ()) {
+    func fetchMovies(orderType: String, completion: @escaping ([Movie]) -> Void, errorHandler: @escaping () -> Void) {
         guard let url: URL = URL(string: baseUrl + "movies?order_type=" + orderType) else {
+            errorHandler()
             return
         }
         
@@ -42,7 +43,9 @@ class BoxOfficeService {
             return
         }
         
-        NetworkService.shared.fetchData(url: url) { (json) in
+        NetworkService.shared.fetchData(url: url, completion: { [weak self] (json) in
+            guard let self = self else { return }
+            
             do {
                 let response = try MoviesApiResponse(json: json)
                 
@@ -50,14 +53,14 @@ class BoxOfficeService {
                 
                 completion(response.movies)
             } catch {
-                NotificationCenter.default.post(name: networkErrorNotificationName, object: nil)
-                print(error)
+                errorHandler()
             }
-        }
+        }) { errorHandler() }
     }
     
-    func fetchMovieDetail(movieId: String, completion: @escaping (MovieDetail) -> ()) {
+    func fetchMovieDetail(movieId: String, completion: @escaping (MovieDetail) -> Void, errorHandler: @escaping () -> Void) {
         guard let url: URL = URL(string: baseUrl + "movie?id=" + movieId) else {
+            errorHandler()
             return
         }
         
@@ -67,7 +70,9 @@ class BoxOfficeService {
             return
         }
         
-        NetworkService.shared.fetchData(url: url) { (json) in
+        NetworkService.shared.fetchData(url: url, completion: { [weak self] (json) in
+            guard let self = self else { return }
+            
             do {
                 let response = try MovieDetailApiResponse(json: json)
                 
@@ -75,14 +80,14 @@ class BoxOfficeService {
                 
                 completion(response.movie)
             } catch {
-                NotificationCenter.default.post(name: networkErrorNotificationName, object: nil)
-                print(error)
+                errorHandler()
             }
-        }
+        }) { errorHandler() }
     }
     
-    func fetchMovieComment(movieId: String, completion: @escaping ([Comment]) -> ()) {
+    func fetchMovieComment(movieId: String, completion: @escaping ([Comment]) -> Void, errorHandler: @escaping () -> Void) {
         guard let url: URL = URL(string: baseUrl + "comments?movie_id=" + movieId) else {
+            errorHandler()
             return
         }
         
@@ -92,7 +97,9 @@ class BoxOfficeService {
             return
         }
         
-        NetworkService.shared.fetchData(url: url) { (json) in
+        NetworkService.shared.fetchData(url: url, completion: { [weak self] (json) in
+            guard let self = self else { return }
+            
             do {
                 let response = try MovieCommentsApiResponse(json: json)
                 
@@ -100,16 +107,13 @@ class BoxOfficeService {
                 
                 completion(response.comments)
             } catch {
-                NotificationCenter.default.post(name: networkErrorNotificationName, object: nil)
-                print(error)
+                errorHandler()
             }
-        }
+        }) { errorHandler() }
     }
     
-    func fetchImage(imageURL: String, completion: @escaping (UIImage) -> ()) {
-        guard let imageURL = URL(string: imageURL) else {
-            return
-        }
+    func fetchImage(imageURL: String, completion: @escaping (UIImage) -> Void) {
+        guard let imageURL = URL(string: imageURL) else { return }
         
         if let cachedImage = ImageCache.shared.object(forKey: imageURL.absoluteString as NSString) {
             completion(cachedImage)
@@ -137,11 +141,13 @@ class BoxOfficeService {
         }
     }
     
-    func registerMovieComment(id: String?, nickname: String, comment: String, rating: Double, completion: @escaping(NetworkStatus) -> ()) {
+    func registerMovieComment(id: String?, nickname: String, comment: String, rating: Double,
+                              completion: @escaping(NetworkStatus) -> Void,
+                              errorHandler: @escaping () -> Void) {
         guard
             let url: URL = URL(string: baseUrl + "comment"),
             let id: String = id else {
-                
+            errorHandler()
             return
         }
         
@@ -153,14 +159,15 @@ class BoxOfficeService {
         request.setValue("Application/json", forHTTPHeaderField: "Content-Type")
         
         guard let httpBody = try? JSONSerialization.data(withJSONObject: parameterDictionary, options: []) else {
+            errorHandler()
             return
         }
         
         request.httpBody = httpBody
         
-        NetworkService.shared.postData(request: request) { (json) in
+        NetworkService.shared.postData(request: request, completion: { (json) in
             completion(NetworkStatus.success)
-        }
+        }) { errorHandler() }
     }
     
 }
