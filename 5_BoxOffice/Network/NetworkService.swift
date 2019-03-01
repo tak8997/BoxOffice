@@ -27,8 +27,8 @@ class NetworkService {
 
     public func fetchData(url: URL, completion: @escaping (Any) -> ()) {
         activityIndicator.startAnimating()
-        session.dataTask(with: url) {[weak self] (data, response, error) in
-            guard let data = data, self = self else {
+        session.dataTask(with: url) { (data, response, error) in
+            guard let data = data else {
                 return
             }
             
@@ -51,10 +51,13 @@ class NetworkService {
     
     public func fetchImage(imageURL: URL, completion: @escaping (UIImage, Int) -> ()) {
         activityIndicator.startAnimating()
-        session.dataTask(with: imageURL) { [weak self] (data, response, error) in
-            guard let data = data,
-                let image = UIImage(data: data),
-                let self = self else { return }
+        session.dataTask(with: imageURL) { (data, response, error) in
+            guard
+                let data = data,
+                let image = UIImage(data: data) else {
+                    
+                return
+            }
             
             DispatchQueue.main.async {
                 completion(image, data.count)
@@ -65,8 +68,8 @@ class NetworkService {
     
     public func postData(request: URLRequest, completion: @escaping (Any) -> ()) {
         activityIndicator.startAnimating()
-        session.dataTask(with: request) { [weak self] (data, response, error) in
-            guard let data = data, self = self else {
+        session.dataTask(with: request) { (data, response, error) in
+            guard let data = data else {
                 return
             }
             

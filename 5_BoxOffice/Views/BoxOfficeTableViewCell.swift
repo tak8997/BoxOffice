@@ -27,10 +27,9 @@ class BoxOfficeTableViewCell: UITableViewCell {
         self.movieGrade.image = UIImage(named: MovieGrade(rawValue: movie.grade)?.movieGrade ?? "")
         self.movieThumb.image = UIImage(named: "img_placeholder")
     
-        BoxOfficeService.shared.fetchImage(imageURL: movie.thumb) { [weak self] (image) in
-            guard let self = self else { return }
-            
+        BoxOfficeService.shared.fetchImage(imageURL: movie.thumb) { (image) in
             if row == index.row {
+                print("zzcc")
                 self.movieThumb.image = image
             }
         }
