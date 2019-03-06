@@ -10,6 +10,10 @@
 		3B35DD5E22267DF900775F57 /* UIViewController+ErrorAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B35DD5D22267DF900775F57 /* UIViewController+ErrorAlert.swift */; };
 		3BABC2B721D7AC84007865B8 /* MovieGrade.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BABC2B621D7AC84007865B8 /* MovieGrade.swift */; };
 		3BABC2B921D7C993007865B8 /* UIApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BABC2B821D7C993007865B8 /* UIApplication.swift */; };
+		3BB0B303222FC47A00258DE9 /* BoxOfficeDetailTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3BB0B302222FC47A00258DE9 /* BoxOfficeDetailTableViewCell.xib */; };
+		3BB0B305222FC48F00258DE9 /* BoxOfficeInfoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3BB0B304222FC48F00258DE9 /* BoxOfficeInfoTableViewCell.xib */; };
+		3BB0B307222FC4A000258DE9 /* BoxOfficeContentTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3BB0B306222FC4A000258DE9 /* BoxOfficeContentTableViewCell.xib */; };
+		3BB0B309222FC4AB00258DE9 /* BoxOfficeCommentTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3BB0B308222FC4AB00258DE9 /* BoxOfficeCommentTableViewCell.xib */; };
 		7D3F600DF83539A25E8DE8F8 /* Pods_5_BoxOffice.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AEA268B3C3D39058ADD0CD6C /* Pods_5_BoxOffice.framework */; };
 		C2035F37215DCDA800718808 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C2035F36215DCDA800718808 /* Assets.xcassets */; };
 		C2108F0E21C4F51C00FC4865 /* BoxOfficeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2108F0D21C4F51C00FC4865 /* BoxOfficeService.swift */; };
@@ -47,6 +51,10 @@
 		3B35DD5D22267DF900775F57 /* UIViewController+ErrorAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+ErrorAlert.swift"; sourceTree = "<group>"; };
 		3BABC2B621D7AC84007865B8 /* MovieGrade.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieGrade.swift; sourceTree = "<group>"; };
 		3BABC2B821D7C993007865B8 /* UIApplication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIApplication.swift; sourceTree = "<group>"; };
+		3BB0B302222FC47A00258DE9 /* BoxOfficeDetailTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BoxOfficeDetailTableViewCell.xib; sourceTree = "<group>"; };
+		3BB0B304222FC48F00258DE9 /* BoxOfficeInfoTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BoxOfficeInfoTableViewCell.xib; sourceTree = "<group>"; };
+		3BB0B306222FC4A000258DE9 /* BoxOfficeContentTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BoxOfficeContentTableViewCell.xib; sourceTree = "<group>"; };
+		3BB0B308222FC4AB00258DE9 /* BoxOfficeCommentTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BoxOfficeCommentTableViewCell.xib; sourceTree = "<group>"; };
 		4F30813297B9E2C6C354C911 /* Pods-5_BoxOffice.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-5_BoxOffice.release.xcconfig"; path = "Pods/Target Support Files/Pods-5_BoxOffice/Pods-5_BoxOffice.release.xcconfig"; sourceTree = "<group>"; };
 		523B713AA93191D45C64346B /* Pods-5_BoxOffice.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-5_BoxOffice.debug.xcconfig"; path = "Pods/Target Support Files/Pods-5_BoxOffice/Pods-5_BoxOffice.debug.xcconfig"; sourceTree = "<group>"; };
 		AEA268B3C3D39058ADD0CD6C /* Pods_5_BoxOffice.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_5_BoxOffice.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -96,6 +104,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3BB0B301222FC40700258DE9 /* Detail */ = {
+			isa = PBXGroup;
+			children = (
+				C22F4705214E5B4300F91E02 /* BoxOfficeDetailTableViewCell.swift */,
+				3BB0B302222FC47A00258DE9 /* BoxOfficeDetailTableViewCell.xib */,
+				C22F4709214FE87400F91E02 /* BoxOfficeInfoTableViewCell.swift */,
+				3BB0B304222FC48F00258DE9 /* BoxOfficeInfoTableViewCell.xib */,
+				C22F4707214FE86300F91E02 /* BoxOfficeContentTableViewCell.swift */,
+				3BB0B306222FC4A000258DE9 /* BoxOfficeContentTableViewCell.xib */,
+				C22F470D214FEA2800F91E02 /* BoxOfficeCommentTableViewCell.swift */,
+				3BB0B308222FC4AB00258DE9 /* BoxOfficeCommentTableViewCell.xib */,
+			);
+			path = Detail;
+			sourceTree = "<group>";
+		};
 		674098FACDCCA8D6FADB5397 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -166,12 +189,9 @@
 		C253D44C21E87150008C18CA /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				3BB0B301222FC40700258DE9 /* Detail */,
 				C2925A02213FEDAB00A61282 /* Main.storyboard */,
 				C253D44D21E871B7008C18CA /* StarRatingView.swift */,
-				C22F4705214E5B4300F91E02 /* BoxOfficeDetailTableViewCell.swift */,
-				C22F4707214FE86300F91E02 /* BoxOfficeContentTableViewCell.swift */,
-				C22F4709214FE87400F91E02 /* BoxOfficeInfoTableViewCell.swift */,
-				C22F470D214FEA2800F91E02 /* BoxOfficeCommentTableViewCell.swift */,
 				C2B711702144E98800C99328 /* BoxOfficeTableViewCell.swift */,
 				C22F46FD214934AD00F91E02 /* BoxOfficeCollectionViewCell.swift */,
 			);
@@ -312,9 +332,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3BB0B303222FC47A00258DE9 /* BoxOfficeDetailTableViewCell.xib in Resources */,
+				3BB0B305222FC48F00258DE9 /* BoxOfficeInfoTableViewCell.xib in Resources */,
 				C2925A09213FEDAC00A61282 /* LaunchScreen.storyboard in Resources */,
+				3BB0B309222FC4AB00258DE9 /* BoxOfficeCommentTableViewCell.xib in Resources */,
 				C2035F37215DCDA800718808 /* Assets.xcassets in Resources */,
 				C2925A04213FEDAB00A61282 /* Main.storyboard in Resources */,
+				3BB0B307222FC4A000258DE9 /* BoxOfficeContentTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

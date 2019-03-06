@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="content_cell" rowHeight="94" id="9cU-zM-LM4" customClass="BoxOfficeContentTableViewCell" customModule="__BoxOffice" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="94"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="9cU-zM-LM4" id="CsS-P1-JiZ">
+                <rect key="frame" x="0.0" y="0.0" width="375" height="93.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="aassdf" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LgI-Hf-6Ka">
+                        <rect key="frame" x="15" y="56" width="345" height="20.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="줄거리" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1p5-H8-58P">
+                        <rect key="frame" x="15" y="15" width="55" height="26"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="21"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="1p5-H8-58P" firstAttribute="top" secondItem="CsS-P1-JiZ" secondAttribute="top" constant="15" id="AU0-EO-fiD"/>
+                    <constraint firstAttribute="trailing" secondItem="LgI-Hf-6Ka" secondAttribute="trailing" constant="15" id="Dx6-S8-zoR"/>
+                    <constraint firstItem="LgI-Hf-6Ka" firstAttribute="top" secondItem="1p5-H8-58P" secondAttribute="bottom" constant="15" id="FND-4i-G2T"/>
+                    <constraint firstItem="LgI-Hf-6Ka" firstAttribute="leading" secondItem="CsS-P1-JiZ" secondAttribute="leading" constant="15" id="Fj1-J7-tBU"/>
+                    <constraint firstAttribute="bottom" secondItem="LgI-Hf-6Ka" secondAttribute="bottom" constant="17" id="axy-rS-kyB"/>
+                    <constraint firstItem="1p5-H8-58P" firstAttribute="leading" secondItem="CsS-P1-JiZ" secondAttribute="leading" constant="15" id="oHp-LQ-hWq"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="movieSynopsis" destination="LgI-Hf-6Ka" id="zTA-rG-47e"/>
+            </connections>
+            <point key="canvasLocation" x="64.799999999999997" y="-83.658170914542737"/>
+        </tableViewCell>
+    </objects>
+</document>
