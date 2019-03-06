@@ -36,6 +36,21 @@ class BoxOfficeDetailViewController: UIViewController {
         navigationController?.navigationBar.topItem?.title = "영화목록"
         navigationController?.navigationBar.tintColor = UIColor.white
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor : UIColor.white]
+        setupTableViewCell()
+    }
+    
+    private func setupTableViewCell() {
+        let boxOfficeDetailNib = UINib(nibName: "BoxOfficeDetailTableViewCell", bundle: nil)
+        tableView.register(boxOfficeDetailNib, forCellReuseIdentifier: "detail_cell")
+        
+        let boxOfficeContentNib = UINib(nibName: "BoxOfficeContentTableViewCell", bundle: nil)
+        tableView.register(boxOfficeContentNib, forCellReuseIdentifier: "content_cell")
+        
+        let boxOfficeInfoNib = UINib(nibName: "BoxOfficeInfoTableViewCell", bundle: nil)
+        tableView.register(boxOfficeInfoNib, forCellReuseIdentifier: "info_cell")
+        
+        let boxOfficeCommentNib = UINib(nibName: "BoxOfficeCommentTableViewCell", bundle: nil)
+        tableView.register(boxOfficeCommentNib, forCellReuseIdentifier: "comment_cell")
     }
     
     // Mark: - load data
